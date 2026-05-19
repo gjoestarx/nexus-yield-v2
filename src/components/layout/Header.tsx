@@ -74,10 +74,9 @@ export function HeaderBar({
         <button
           onClick={() => setSearchOpen(!searchOpen)}
           className={cn(
-            'flex h-8 w-8 items-center justify-center rounded-lg transition-all',
-            searchOpen ? 'bg-[var(--accent-dim)] text-[var(--accent)]' : 'text-[var(--text-muted)] hover:bg-[var(--bg-primary)] hover:text-[var(--text-secondary)]'
+            'flex h-8 w-8 items-center justify-center rounded-[8px] transition-all',
+            searchOpen ? 'bg-[var(--accent-dim)] text-[var(--accent)]' : 'text-[var(--text-muted)] hover:bg-white/[0.03] hover:text-[var(--text-secondary)]'
           )}
-          title="Search pools"
         >
           <span className="text-sm">⌕</span>
         </button>
@@ -86,16 +85,14 @@ export function HeaderBar({
             <input
               ref={searchInputRef}
               type="text"
-              placeholder="Search pools, protocols, chains..."
+              placeholder="Search pools..."
               value={localSearch}
               onChange={(e) => handleSearchInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="h-8 w-[260px] rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] pl-3 pr-8 text-[12px] text-white placeholder-[var(--text-muted)] outline-none focus:border-[var(--accent)]/30"
+              className="h-8 w-[240px] rounded-[10px] border border-[var(--border)] bg-[var(--bg-primary)] pl-3 pr-8 text-[12px] text-white placeholder-[var(--text-muted)] outline-none focus:border-[var(--accent)]/30"
             />
             {localSearch && (
-              <div className="absolute right-8 flex items-center gap-1">
-                <span className="text-[10px] text-[var(--text-muted)]">{searchResultCount ?? 0}</span>
-              </div>
+              <div className="absolute right-8 text-[10px] text-[var(--text-muted)]">{searchResultCount ?? 0}</div>
             )}
             <button onClick={clearSearch} className="absolute right-1.5 flex h-5 w-5 items-center justify-center rounded text-[var(--text-muted)] hover:text-white">✕</button>
           </div>
@@ -111,17 +108,15 @@ export function HeaderBar({
           <button
             onClick={() => setRefreshDropdownOpen(!refreshDropdownOpen)}
             className={cn(
-              'flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[10px] font-medium transition-all',
-              refreshInterval > 0 ? 'bg-[var(--green-dim)] text-[var(--green)]' : 'text-[var(--text-muted)] hover:bg-[var(--bg-primary)] hover:text-[var(--text-secondary)]'
+              'flex items-center gap-1.5 rounded-[8px] px-2.5 py-1.5 text-[10px] font-medium transition-all',
+              refreshInterval > 0 ? 'bg-[var(--green-dim)] text-[var(--green)]' : 'text-[var(--text-muted)] hover:bg-white/[0.03]'
             )}
           >
-            <span className={cn('inline-block text-[10px]', refreshInterval > 0 && 'animate-spin')} style={{ animationDuration: refreshInterval > 0 ? '2s' : undefined }}>
-              ↻
-            </span>
+            <span className={cn('inline-block text-[10px]', refreshInterval > 0 && 'animate-spin')} style={{ animationDuration: refreshInterval > 0 ? '2s' : undefined }}>↻</span>
             {refreshInterval > 0 ? `${REFRESH_OPTIONS.find(o => o.value === refreshInterval)?.label ?? refreshInterval + 's'}` : 'Auto'}
           </button>
           {refreshDropdownOpen && (
-            <div className="absolute right-0 top-full z-50 mt-1 w-36 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] shadow-lg">
+            <div className="absolute right-0 top-full z-50 mt-1 w-36 rounded-[10px] border border-[var(--border)] bg-[var(--bg-secondary)] shadow-lg">
               <div className="px-3 py-2 text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Refresh</div>
               {REFRESH_OPTIONS.map((opt) => (
                 <button
@@ -145,13 +140,13 @@ export function HeaderBar({
           )}
         </div>
 
-        <div className="flex gap-0.5 rounded-lg bg-[var(--bg-primary)] p-0.5">
+        <div className="flex gap-0.5 rounded-[8px] bg-[var(--bg-primary)] p-0.5">
           {MODES.map((m) => (
             <button
               key={m.value}
               onClick={() => onModeChange(m.value)}
               className={cn(
-                'rounded-md px-3 py-1.5 text-[10px] font-medium transition-all',
+                'rounded-[6px] px-3 py-1.5 text-[10px] font-medium transition-all',
                 mode === m.value ? 'bg-[var(--accent-dim)] text-[var(--accent)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
               )}
             >

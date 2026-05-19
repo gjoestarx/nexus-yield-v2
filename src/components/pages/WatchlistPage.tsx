@@ -62,12 +62,12 @@ export function WatchlistPage({ pools, risks }: WatchlistPageProps) {
   return (
     <div className="space-y-5 animate-in">
       {isConnected ? (
-        <div className="panel flex items-center gap-3 bg-[var(--green-dim)] p-3">
+        <div className="card-flat flex items-center gap-3 bg-[var(--green-dim)] p-3">
           <div className="h-2 w-2 rounded-full bg-[var(--green)]" />
           <div className="text-[11px]"><span className="text-[var(--green)]">Wallet connected</span><span className="text-[var(--text-muted)]"> — watchlist saved to your wallet address</span></div>
         </div>
       ) : (
-        <div className="panel flex items-center gap-3 bg-[var(--gold-dim)] p-3">
+        <div className="card-flat flex items-center gap-3 bg-[var(--gold-dim)] p-3">
           <div className="h-2 w-2 rounded-full bg-[var(--gold)]" />
           <div className="text-[11px]"><span className="text-[var(--gold)]">No wallet connected</span><span className="text-[var(--text-muted)]"> — watchlist saved locally. Connect wallet to persist across devices.</span></div>
         </div>
@@ -75,24 +75,24 @@ export function WatchlistPage({ pools, risks }: WatchlistPageProps) {
 
       {summary && (
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <div className="panel p-4" style={{ borderLeft: '3px solid var(--accent)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Watching</div><div className="mt-1 text-[22px] font-bold text-[var(--accent)]">{summary.count}</div></div>
-          <div className="panel p-4" style={{ borderLeft: '3px solid var(--green)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Avg APY</div><div className="mt-1 text-[22px] font-bold text-[var(--green)]">{formatPct(summary.avgApy)}</div></div>
-          <div className="panel p-4" style={{ borderLeft: '3px solid var(--gold)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Avg Risk</div><div className="mt-1 text-[22px] font-bold text-[var(--gold)]">{summary.avgRisk.toFixed(1)}</div></div>
-          <div className="panel p-4" style={{ borderLeft: '3px solid var(--gold)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Total TVL</div><div className="mt-1 text-[22px] font-bold text-[var(--gold)]">{formatUsd(summary.totalTvl)}</div></div>
+          <div className="card-flat p-4" style={{ borderLeft: '3px solid var(--accent)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Watching</div><div className="mt-1 text-[22px] font-bold text-[var(--accent)]">{summary.count}</div></div>
+          <div className="card-flat p-4" style={{ borderLeft: '3px solid var(--green)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Avg APY</div><div className="mt-1 text-[22px] font-bold text-[var(--green)]">{formatPct(summary.avgApy)}</div></div>
+          <div className="card-flat p-4" style={{ borderLeft: '3px solid var(--gold)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Avg Risk</div><div className="mt-1 text-[22px] font-bold text-[var(--gold)]">{summary.avgRisk.toFixed(1)}</div></div>
+          <div className="card-flat p-4" style={{ borderLeft: '3px solid var(--gold)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Total TVL</div><div className="mt-1 text-[22px] font-bold text-[var(--gold)]">{formatUsd(summary.totalTvl)}</div></div>
         </div>
       )}
 
-      <div className="panel p-4">
+      <div className="card-flat p-4">
         <div className="mb-3 text-[12px] font-semibold">Add to Watchlist</div>
         <div className="relative">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">⌕</span>
           <input type="text" placeholder="Search pools to watch..." value={search} onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] outline-none focus:border-[var(--accent)]/30" />
+            className="w-full rounded-[10px] border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] outline-none focus:border-[var(--accent)]/30" />
         </div>
         {searchResults.length > 0 && (
           <div className="mt-2 space-y-0.5">
             {searchResults.map((pool) => (
-              <div key={pool.id} onClick={() => { toggleWatch(pool.id); setSearch(''); }} className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-[11px] hover:bg-white/[0.03]">
+              <div key={pool.id} onClick={() => { toggleWatch(pool.id); setSearch(''); }} className="flex cursor-pointer items-center justify-between rounded-[10px] px-3 py-2 text-[11px] hover:bg-white/[0.03]">
                 <div className="flex items-center gap-2"><div className="h-2 w-2 rounded-full" style={{ background: CHAIN_COLORS[pool.chain] }} /><span className="font-medium">{pool.symbol}</span><span className="text-[var(--text-muted)]">{pool.protocol} · {CHAIN_LABELS[pool.chain]}</span></div>
                 <div className="flex items-center gap-3"><span className="text-[var(--green)]">{formatPct(pool.apy)}</span><span className="text-[var(--accent)]">+ Watch</span></div>
               </div>
@@ -101,7 +101,7 @@ export function WatchlistPage({ pools, risks }: WatchlistPageProps) {
         )}
       </div>
 
-      <div className="panel p-0 overflow-hidden">
+      <div className="card-flat p-0 overflow-hidden">
         <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-3">
           <div className="text-[12px] font-semibold">★ Your Watchlist ({watchedPools.length})</div>
           <div className="flex gap-1">

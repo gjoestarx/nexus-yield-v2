@@ -15,7 +15,7 @@ export function GrowthCurve({ simulation, capital }: GrowthCurveProps) {
   }));
 
   return (
-    <Card className="panel-glass">
+    <Card className="card-glass">
       <div className="mb-3 text-sm font-semibold">Portfolio Growth Simulation</div>
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -32,7 +32,7 @@ export function GrowthCurve({ simulation, capital }: GrowthCurveProps) {
               if (!payload?.length) return null;
               const d = payload[0].payload;
               return (
-                <div className="panel-glass rounded-xl px-4 py-3 shadow-xl">
+                <div className="card-glass rounded-[16px] px-4 py-3 shadow-xl">
                   <div className="text-sm font-medium">Day {d.day}</div>
                   <div className="text-sm text-[var(--green)]">Best: {formatUsd(d.best)}</div>
                   <div className="text-sm text-[var(--accent)]">Expected: {formatUsd(d.value)}</div>

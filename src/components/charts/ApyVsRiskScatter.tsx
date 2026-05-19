@@ -26,7 +26,7 @@ export function ApyVsRiskScatter({ pools, risks, onSelect }: ApyVsRiskScatterPro
   };
 
   return (
-    <Card className="panel-glass">
+    <Card className="card-glass">
       <div className="mb-3 text-sm font-semibold">APY vs Risk Score</div>
       <div className="h-[350px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -38,7 +38,7 @@ export function ApyVsRiskScatter({ pools, risks, onSelect }: ApyVsRiskScatterPro
               if (!payload?.length) return null;
               const d = payload[0].payload;
               return (
-                <div className="panel-glass rounded-xl px-4 py-3 shadow-xl">
+                <div className="card-glass rounded-[16px] px-4 py-3 shadow-xl">
                   <div className="text-sm font-bold">{d.name}</div>
                   <div className="text-[10px] text-[var(--text-muted)]">{d.protocol} · {CHAIN_LABELS[d.chain]}</div>
                   <div className="mt-2 space-y-0.5 text-xs">

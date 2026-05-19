@@ -30,7 +30,7 @@ export function RiskHistogram({ risks }: RiskHistogramProps) {
   }, [risks]);
 
   return (
-    <Card className="panel-glass">
+    <Card className="card-glass">
       <div className="mb-3 text-sm font-semibold">Risk Distribution</div>
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -41,7 +41,7 @@ export function RiskHistogram({ risks }: RiskHistogramProps) {
             <Tooltip content={({ payload }) => {
               if (!payload?.length) return null;
               const d = payload[0].payload;
-              return (<div className="panel-glass rounded-xl px-4 py-3 shadow-xl"><div className="text-sm font-medium">Risk: {d.range}</div><div className="text-sm text-[var(--text-muted)]">{d.count} pools</div></div>);
+              return (<div className="card-glass rounded-[16px] px-4 py-3 shadow-xl"><div className="text-sm font-medium">Risk: {d.range}</div><div className="text-sm text-[var(--text-muted)]">{d.count} pools</div></div>);
             }} />
             <Bar dataKey="count" radius={[4, 4, 0, 0]}>
               {data.map((entry, index) => (<Cell key={index} fill={entry.color} fillOpacity={0.8} />))}

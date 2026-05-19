@@ -18,7 +18,7 @@ export function PoolTable({ pools, risks, rankings, onSelect, loading }: PoolTab
 
   if (loading) {
     return (
-      <Card className="panel-glass">
+      <Card className="card-glass">
         <div className="space-y-3">{[...Array(8)].map((_, i) => (<div key={i} className="flex gap-4 animate-pulse"><div className="h-5 w-32 rounded bg-white/5" /><div className="h-5 w-20 rounded bg-white/5" /><div className="h-5 w-16 rounded bg-white/5" /><div className="h-5 w-16 rounded bg-white/5" /></div>))}</div>
       </Card>
     );
@@ -29,7 +29,7 @@ export function PoolTable({ pools, risks, rankings, onSelect, loading }: PoolTab
       <div className="flex items-center justify-between">
         <div className="text-[11px] text-[var(--text-muted)]">{pools.length} pools</div>
       </div>
-      <Card className="panel-glass overflow-hidden p-0">
+      <Card className="card-glass overflow-hidden p-0">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>

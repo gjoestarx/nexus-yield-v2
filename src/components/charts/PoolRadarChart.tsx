@@ -46,7 +46,7 @@ export function PoolRadarChart({ pools, risks, selectedIds }: PoolRadarChartProp
   }, [displayPools, riskMap]);
 
   return (
-    <Card className="panel-glass">
+    <Card className="card-glass">
       <div className="mb-3 text-sm font-semibold">Pool Comparison Radar</div>
       <div className="h-[350px]">
         <ResponsiveContainer width="100%" height="100%">
@@ -60,7 +60,7 @@ export function PoolRadarChart({ pools, risks, selectedIds }: PoolRadarChartProp
             <Tooltip content={({ payload }) => {
               if (!payload?.length) return null;
               return (
-                <div className="panel-glass rounded-xl px-4 py-3 shadow-xl">
+                <div className="card-glass rounded-[16px] px-4 py-3 shadow-xl">
                   {payload.map((p, i) => (
                     <div key={i} className="text-sm"><span style={{ color: p.color }}>{p.name}</span>: <span className="font-mono">{p.value}%</span></div>
                   ))}

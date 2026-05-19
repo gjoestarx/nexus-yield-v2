@@ -36,7 +36,7 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
   return (
     <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/60 p-4 pt-8 backdrop-blur-md">
       <div className="w-full max-w-3xl space-y-4 pb-8">
-        <div className="panel overflow-hidden">
+        <div className="card-flat overflow-hidden">
           <div className="bg-gradient-to-r from-[var(--accent)]/10 to-[var(--rose)]/5 px-6 py-5">
             <div className="flex items-start justify-between">
               <div>
@@ -48,8 +48,8 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                {pool.url && (<a href={pool.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 rounded-lg bg-[var(--accent)] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[var(--accent)]/80 transition-colors shadow-lg shadow-accent/20">↗ Open on DefiLlama</a>)}
-                <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm transition-colors hover:bg-white/20">✕</button>
+                {pool.url && (<a href={pool.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 rounded-[10px] bg-[var(--accent)] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[var(--accent)]/80 transition-colors shadow-lg shadow-accent/20">↗ Open on DefiLlama</a>)}
+                <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-white/10 text-sm transition-colors hover:bg-white/20">✕</button>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
           </div>
         </div>
 
-        <div className="flex gap-1 rounded-lg bg-[var(--bg-primary)] p-1">
+        <div className="flex gap-1 rounded-[10px] bg-[var(--bg-primary)] p-1">
           {([{ id: 'overview', label: 'Overview' }, { id: 'history', label: 'History' }, { id: 'simulate', label: 'Simulate' }] as const).map((tab) => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 rounded-md px-3 py-2 text-[12px] font-medium transition-all ${activeTab === tab.id ? 'bg-[var(--accent-dim)] text-[var(--accent)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}`}>{tab.label}</button>
           ))}
@@ -69,7 +69,7 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
 
         {activeTab === 'overview' && (
           <div className="space-y-4 animate-in">
-            <div className="panel p-4">
+            <div className="card-flat p-4">
               <div className="mb-4 text-[12px] font-semibold">Risk Factor Breakdown</div>
               <div className="space-y-3">
                 {Object.entries(risk.factors).map(([key, value]) => (
@@ -83,7 +83,7 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
               <div className="mt-3 flex items-center justify-between text-[11px] text-[var(--text-muted)]"><span>Confidence: {(risk.confidence * 100).toFixed(0)}%</span><span>Category: <span style={{ color: riskColor }} className="font-medium">{risk.category}</span></span></div>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="panel p-4">
+              <div className="card-flat p-4">
                 <div className="mb-2 text-[11px] font-semibold text-[var(--text-muted)]">Yield Details</div>
                 <div className="space-y-1.5 text-[11px]">
                   <DetailRow label="Current APY" value={formatPct(pool.apy)} highlight />
@@ -92,7 +92,7 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                   <DetailRow label="Reward APY" value={pool.apyReward ? formatPct(pool.apyReward) : 'N/A'} />
                 </div>
               </div>
-              <div className="panel p-4">
+              <div className="card-flat p-4">
                 <div className="mb-2 text-[11px] font-semibold text-[var(--text-muted)]">Pool Properties</div>
                 <div className="space-y-1.5 text-[11px]">
                   <DetailRow label="TVL" value={formatUsd(pool.tvlUsd)} highlight />
@@ -103,14 +103,14 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                 </div>
               </div>
             </div>
-            {pool.url && (<a href={pool.url} target="_blank" rel="noopener noreferrer" className="panel flex items-center justify-between p-4 hover:bg-white/[0.03] transition-colors cursor-pointer"><div><div className="text-[12px] font-medium">View on DefiLlama</div><div className="text-[10px] text-[var(--text-muted)]">Full pool details, historical data, and protocol info</div></div><span className="text-[var(--accent)] text-[14px]">↗</span></a>)}
+            {pool.url && (<a href={pool.url} target="_blank" rel="noopener noreferrer" className="card-flat flex items-center justify-between p-4 hover:bg-white/[0.03] transition-colors cursor-pointer"><div><div className="text-[12px] font-medium">View on DefiLlama</div><div className="text-[10px] text-[var(--text-muted)]">Full pool details, historical data, and protocol info</div></div><span className="text-[var(--accent)] text-[14px]">↗</span></a>)}
           </div>
         )}
 
         {activeTab === 'history' && (
           <div className="space-y-4 animate-in">
             {historyLoading ? (
-              <div className="panel flex h-[200px] items-center justify-center"><div className="text-center"><div className="mx-auto mb-2 h-6 w-6 animate-spin rounded-full border-2 border-[var(--accent)]/30 border-t-[var(--accent)]" /><div className="text-[11px] text-[var(--text-muted)]">Loading historical data...</div></div></div>
+              <div className="card-flat flex h-[200px] items-center justify-center"><div className="text-center"><div className="mx-auto mb-2 h-6 w-6 animate-spin rounded-full border-2 border-[var(--accent)]/30 border-t-[var(--accent)]" /><div className="text-[11px] text-[var(--text-muted)]">Loading historical data...</div></div></div>
             ) : history.length > 0 ? (
               <>
                 {historyStats && (
@@ -121,7 +121,7 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                     <MiniStat label="Data Points" value={String(historyStats.points)} color="var(--gold)" />
                   </div>
                 )}
-                <div className="panel p-0 overflow-hidden">
+                <div className="card-flat p-0 overflow-hidden">
                   <div className="border-b border-[var(--border)] px-5 py-3"><div className="text-[12px] font-semibold">APY History</div><div className="text-[10px] text-[var(--text-muted)]">{historyStats?.from} → {historyStats?.to}</div></div>
                   <div className="h-[280px] px-2 py-2">
                     <ResponsiveContainer width="100%" height="100%">
@@ -130,13 +130,13 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                         <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
                         <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => { const d = new Date(v); return `${d.getMonth()+1}/${d.getFullYear().toString().slice(2)}`; }} interval="preserveStartEnd" />
                         <YAxis tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
-                        <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 }} labelFormatter={(l) => new Date(l).toLocaleDateString()} formatter={(v) => [`${Number(v).toFixed(2)}%`, 'APY']} />
+                        <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, fontSize: 11 }} labelFormatter={(l) => new Date(l).toLocaleDateString()} formatter={(v) => [`${Number(v).toFixed(2)}%`, 'APY']} />
                         <Area type="monotone" dataKey="apy" stroke="#a78bfa" strokeWidth={2} fill="url(#histGrad)" dot={false} />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
-                <div className="panel p-0 overflow-hidden">
+                <div className="card-flat p-0 overflow-hidden">
                   <div className="border-b border-[var(--border)] px-5 py-3"><div className="text-[12px] font-semibold">TVL History</div></div>
                   <div className="h-[200px] px-2 py-2">
                     <ResponsiveContainer width="100%" height="100%">
@@ -145,24 +145,24 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                         <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
                         <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => { const d = new Date(v); return `${d.getMonth()+1}/${d.getFullYear().toString().slice(2)}`; }} interval="preserveStartEnd" />
                         <YAxis tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(Number(v)/1e9).toFixed(1)}B`} />
-                        <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 }} formatter={(v) => [formatUsd(Number(v)), 'TVL']} />
+                        <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, fontSize: 11 }} formatter={(v) => [formatUsd(Number(v)), 'TVL']} />
                         <Area type="monotone" dataKey="tvl" stroke="#fb7185" strokeWidth={2} fill="url(#tvlGrad)" dot={false} />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
               </>
-            ) : (<div className="panel flex h-[200px] items-center justify-center text-[12px] text-[var(--text-muted)]">No historical data available</div>)}
+            ) : (<div className="card-flat flex h-[200px] items-center justify-center text-[12px] text-[var(--text-muted)]">No historical data available</div>)}
           </div>
         )}
 
         {activeTab === 'simulate' && (
           <div className="space-y-4 animate-in">
-            <div className="panel p-4">
+            <div className="card-flat p-4">
               <div className="mb-4 text-[12px] font-semibold">Simulation Parameters</div>
               <div className="flex flex-wrap items-end gap-4">
-                <div><label className="mb-1 block text-[10px] text-[var(--text-muted)]">Capital ($)</label><input type="number" value={capital} onChange={(e) => setCapital(Number(e.target.value))} className="w-28 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--accent)]/30" /></div>
-                <div><label className="mb-1 block text-[10px] text-[var(--text-muted)]">Days</label><input type="number" value={days} onChange={(e) => setDays(Number(e.target.value))} className="w-24 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--accent)]/30" /></div>
+                <div><label className="mb-1 block text-[10px] text-[var(--text-muted)]">Capital ($)</label><input type="number" value={capital} onChange={(e) => setCapital(Number(e.target.value))} className="w-28 rounded-[10px] border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--accent)]/30" /></div>
+                <div><label className="mb-1 block text-[10px] text-[var(--text-muted)]">Days</label><input type="number" value={days} onChange={(e) => setDays(Number(e.target.value))} className="w-24 rounded-[10px] border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--accent)]/30" /></div>
                 <Button onClick={() => simulate(pool, capital, days, mode)} disabled={simLoading} className="bg-gradient-to-r from-[var(--accent)] to-[var(--rose)]">{simLoading ? 'Running...' : 'Run Monte Carlo'}</Button>
               </div>
             </div>
@@ -179,7 +179,7 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                   <MiniStat label="IL Estimate" value={`${result.simulation.impermanentLossEstimate.toFixed(2)}%`} color="var(--gold)" />
                   <MiniStat label="Gas Impact" value={`${result.simulation.gasImpact.toFixed(2)}%`} color="var(--text-muted)" />
                 </div>
-                <div className="panel p-0 overflow-hidden">
+                <div className="card-flat p-0 overflow-hidden">
                   <div className="border-b border-[var(--border)] px-5 py-3"><div className="text-[12px] font-semibold">Growth Projection</div><div className="text-[10px] text-[var(--text-muted)]">{formatUsd(capital)} → {formatUsd(result.simulation.expectedReturn)} in {days} days</div></div>
                   <div className="h-[250px] px-2 py-2">
                     <ResponsiveContainer width="100%" height="100%">
@@ -188,14 +188,14 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                         <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
                         <XAxis dataKey="day" tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} />
                         <YAxis tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v/1000).toFixed(1)}K`} />
-                        <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 }} formatter={(v) => [formatUsd(Number(v)), 'Value']} labelFormatter={(l) => `Day ${l}`} />
+                        <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, fontSize: 11 }} formatter={(v) => [formatUsd(Number(v)), 'Value']} labelFormatter={(l) => `Day ${l}`} />
                         <ReferenceLine y={capital} stroke="#4a5f82" strokeDasharray="5 5" />
                         <Area type="monotone" dataKey="value" stroke="#a78bfa" strokeWidth={2} fill="url(#simGrad)" />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
-                <div className="panel bg-[var(--accent-dim)] p-4">
+                <div className="card-flat bg-[var(--accent-dim)] p-4">
                   <div className="mb-2 text-[12px] font-semibold text-[var(--accent)]">{result.explanation.headline}</div>
                   <ul className="space-y-1 text-[11px] text-[var(--text-secondary)]">{result.explanation.insights.map((insight, i) => (<li key={i} className="flex items-start gap-2"><span className="text-[var(--accent)]">▸</span>{insight}</li>))}</ul>
                   <div className="mt-2 text-[11px]"><strong className="text-[var(--accent)]">Recommendation:</strong> {result.explanation.recommendation}</div>
@@ -217,5 +217,5 @@ function DetailRow({ label, value, highlight }: { label: string; value: string; 
   return (<div className="flex justify-between"><span className="text-[var(--text-muted)]">{label}</span><span className={`font-mono ${highlight ? 'font-semibold text-[var(--green)]' : ''}`}>{value}</span></div>);
 }
 function MiniStat({ label, value, color }: { label: string; value: string; color: string }) {
-  return (<div className="panel p-3" style={{ borderLeft: `3px solid ${color}` }}><div className="text-[9px] font-medium uppercase tracking-wider text-[var(--text-muted)]">{label}</div><div className="mt-0.5 text-[15px] font-bold" style={{ color }}>{value}</div></div>);
+  return (<div className="card-flat p-3" style={{ borderLeft: `3px solid ${color}` }}><div className="text-[9px] font-medium uppercase tracking-wider text-[var(--text-muted)]">{label}</div><div className="mt-0.5 text-[15px] font-bold" style={{ color }}>{value}</div></div>);
 }

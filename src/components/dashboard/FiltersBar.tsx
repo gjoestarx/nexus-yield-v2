@@ -40,7 +40,7 @@ export function FiltersBar({ filters, onUpdate, onRefresh, loading }: FiltersBar
 
   return (
     <div className="flex flex-wrap items-center gap-4">
-      <div className="flex gap-1 rounded-lg bg-[var(--bg-primary)] p-1">
+      <div className="flex gap-1 rounded-[10px] bg-[var(--bg-primary)] p-1">
         {MODES.map((m) => (
           <button key={m.value} onClick={() => onUpdate({ mode: m.value })}
             className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${filters.mode === m.value ? 'bg-[var(--accent-dim)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}`}>

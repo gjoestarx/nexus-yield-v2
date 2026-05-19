@@ -61,19 +61,19 @@ export function ExplorerPage({ pools, risks, rankings, onSelectPool }: ExplorerP
 
   return (
     <div className="space-y-4 animate-in">
-      <div className="panel-glass flex flex-wrap items-center gap-3 p-4">
+      <div className="card-glass flex flex-wrap items-center gap-3 p-4">
         <div className="relative flex-1 min-w-[200px]">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">⌕</span>
           <input type="text" placeholder="Search pools, protocols, chains..." value={search} onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-lg border border-[var(--border)] bg-black/30 py-2 pl-9 pr-4 text-sm text-white placeholder-[var(--text-muted)] outline-none focus:border-[var(--accent)]/30 focus:ring-1 focus:ring-[var(--accent)]/30" />
+            className="w-full rounded-[10px] border border-[var(--border)] bg-black/30 py-2 pl-9 pr-4 text-sm text-white placeholder-[var(--text-muted)] outline-none focus:border-[var(--accent)]/30 focus:ring-1 focus:ring-[var(--accent)]/30" />
         </div>
         <select value={chainFilter} onChange={(e) => setChainFilter(e.target.value as Chain | 'all')}
-          className="rounded-lg border border-[var(--border)] bg-black/30 px-3 py-2 text-sm text-white">
+          className="rounded-[10px] border border-[var(--border)] bg-black/30 px-3 py-2 text-sm text-white">
           <option value="all">All Chains</option>
           {ALL_CHAINS.map((chain) => <option key={chain} value={chain}>{CHAIN_LABELS[chain]}</option>)}
         </select>
         <select value={riskFilter} onChange={(e) => setRiskFilter(e.target.value)}
-          className="rounded-lg border border-[var(--border)] bg-black/30 px-3 py-2 text-sm text-white">
+          className="rounded-[10px] border border-[var(--border)] bg-black/30 px-3 py-2 text-sm text-white">
           <option value="all">All Risk Levels</option>
           <option value="Very Low">Very Low</option>
           <option value="Low">Low</option>
@@ -84,7 +84,7 @@ export function ExplorerPage({ pools, risks, rankings, onSelectPool }: ExplorerP
         <div className="text-xs text-[var(--text-muted)]">{filtered.length} pools</div>
       </div>
 
-      <Card className="panel-glass p-0 overflow-hidden">
+      <Card className="card-glass p-0 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>

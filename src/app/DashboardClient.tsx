@@ -105,7 +105,7 @@ export default function Dashboard() {
   return (
     <div className="flex min-h-screen bg-mesh">
       <Sidebar active={activePage} onNavigate={setActivePage} poolCount={data.stats.totalPools} alertCount={alertCount} chainCount={data.stats.chains.length} />
-      <div className="ml-[200px] flex-1">
+      <div className="ml-[220px] flex-1">
         <HeaderBar
           title={pageInfo.title}
           subtitle={pageInfo.subtitle}

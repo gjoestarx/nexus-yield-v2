@@ -60,14 +60,14 @@ export function AlertManager({ pools, risks, onAlertCountChange }: AlertManagerP
   return (
     <div className="space-y-5 animate-in">
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <div className="panel p-4" style={{ borderLeft: '3px solid var(--accent)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Total Alerts</div><div className="mt-1 text-[22px] font-bold text-[var(--accent)]">{alerts.length}</div></div>
-        <div className="panel p-4" style={{ borderLeft: '3px solid var(--green)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Active</div><div className="mt-1 text-[22px] font-bold text-[var(--green)]">{activeAlertCount}</div></div>
-        <div className="panel p-4" style={{ borderLeft: '3px solid var(--gold)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Triggered</div><div className="mt-1 text-[22px] font-bold text-[var(--gold)]">{triggeredCount}</div></div>
-        <div className="panel p-4" style={{ borderLeft: '3px solid var(--gold)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Dismissed</div><div className="mt-1 text-[22px] font-bold text-[var(--gold)]">{dismissedIds.size}</div></div>
+        <div className="card-flat p-4" style={{ borderLeft: '3px solid var(--accent)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Total Alerts</div><div className="mt-1 text-[22px] font-bold text-[var(--accent)]">{alerts.length}</div></div>
+        <div className="card-flat p-4" style={{ borderLeft: '3px solid var(--green)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Active</div><div className="mt-1 text-[22px] font-bold text-[var(--green)]">{activeAlertCount}</div></div>
+        <div className="card-flat p-4" style={{ borderLeft: '3px solid var(--gold)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Triggered</div><div className="mt-1 text-[22px] font-bold text-[var(--gold)]">{triggeredCount}</div></div>
+        <div className="card-flat p-4" style={{ borderLeft: '3px solid var(--gold)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Dismissed</div><div className="mt-1 text-[22px] font-bold text-[var(--gold)]">{dismissedIds.size}</div></div>
       </div>
 
       {triggeredCount > 0 && (
-        <div className="panel bg-[var(--gold-dim)] p-4">
+        <div className="card-flat bg-[var(--gold-dim)] p-4">
           <div className="mb-2 flex items-center gap-2 text-[12px] font-semibold text-[var(--gold)]">
             <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[var(--gold)] text-[10px] font-bold text-black">{triggeredCount}</span>
             Alert{triggeredCount > 1 ? 's' : ''} Triggered
@@ -76,7 +76,7 @@ export function AlertManager({ pools, risks, onAlertCountChange }: AlertManagerP
             {alerts.filter((a) => triggeredIds.has(a.id)).map((alert) => {
               const pool = pools.find((p) => p.id === alert.poolId);
               return (
-                <div key={alert.id} className="flex items-center justify-between rounded-lg bg-black/20 px-3 py-2 text-[11px]">
+                <div key={alert.id} className="flex items-center justify-between rounded-[10px] bg-black/20 px-3 py-2 text-[11px]">
                   <div><span className="font-medium text-[var(--gold)]">{alert.poolSymbol}</span><span className="text-[var(--text-muted)]"> APY {alert.direction === 'above' ? '≥' : '≤'} {formatPct(alert.threshold)} → now <span className="font-mono text-[var(--green)]">{pool ? formatPct(pool.apy) : '—'}</span></span></div>
                   <div className="flex gap-2">
                     <button onClick={() => dismissAlert(alert.id)} className="rounded-md bg-[var(--gold)]/20 px-2 py-1 text-[10px] text-[var(--gold)] hover:bg-[var(--gold)]/30">Dismiss</button>
@@ -89,17 +89,17 @@ export function AlertManager({ pools, risks, onAlertCountChange }: AlertManagerP
         </div>
       )}
 
-      <div className="panel p-4">
+      <div className="card-flat p-4">
         <div className="mb-3 text-[12px] font-semibold">Create New Alert</div>
         <div className="relative mb-3">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">⌕</span>
           <input type="text" placeholder="Search pools..." value={search} onChange={(e) => { setSearch(e.target.value); setSelectedPoolId(''); }}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] outline-none focus:border-[var(--accent)]/30" />
+            className="w-full rounded-[10px] border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] outline-none focus:border-[var(--accent)]/30" />
         </div>
         {searchResults.length > 0 && !selectedPoolId && (
-          <div className="mb-3 space-y-0.5 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] p-1">
+          <div className="mb-3 space-y-0.5 rounded-[10px] border border-[var(--border)] bg-[var(--bg-primary)] p-1">
             {searchResults.map((pool) => (
-              <div key={pool.id} onClick={() => { setSelectedPoolId(pool.id); setSearch(pool.symbol); }} className="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-[11px] hover:bg-white/[0.03]">
+              <div key={pool.id} onClick={() => { setSelectedPoolId(pool.id); setSearch(pool.symbol); }} className="flex cursor-pointer items-center justify-between rounded-[10px] px-3 py-2 text-[11px] hover:bg-white/[0.03]">
                 <div className="flex items-center gap-2"><div className="h-2 w-2 rounded-full" style={{ background: CHAIN_COLORS[pool.chain] }} /><span className="font-medium">{pool.symbol}</span><span className="text-[var(--text-muted)]">{pool.protocol} · {CHAIN_LABELS[pool.chain]}</span></div>
                 <span className="font-mono text-[var(--green)]">{formatPct(pool.apy)}</span>
               </div>
@@ -111,22 +111,22 @@ export function AlertManager({ pools, risks, onAlertCountChange }: AlertManagerP
             <label className="mb-1 block text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Direction</label>
             <div className="flex gap-1">
               {(['above', 'below'] as const).map((d) => (
-                <button key={d} onClick={() => setDirection(d)} className={`flex-1 rounded-lg px-3 py-2 text-[11px] font-medium transition-all ${direction === d ? d === 'above' ? 'bg-[var(--green-dim)] text-[var(--green)] ring-1 ring-[var(--green)]/30' : 'bg-[var(--red-dim)] text-[var(--red)] ring-1 ring-[var(--red)]/30' : 'bg-white/[0.03] text-[var(--text-muted)] hover:bg-white/[0.06]'}`}>{d === 'above' ? '↑ Above' : '↓ Below'}</button>
+                <button key={d} onClick={() => setDirection(d)} className={`flex-1 rounded-[10px] px-3 py-2 text-[11px] font-medium transition-all ${direction === d ? d === 'above' ? 'bg-[var(--green-dim)] text-[var(--green)] ring-1 ring-[var(--green)]/30' : 'bg-[var(--red-dim)] text-[var(--red)] ring-1 ring-[var(--red)]/30' : 'bg-white/[0.03] text-[var(--text-muted)] hover:bg-white/[0.06]'}`}>{d === 'above' ? '↑ Above' : '↓ Below'}</button>
               ))}
             </div>
           </div>
           <div>
             <label className="mb-1 block text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">APY Threshold (%)</label>
             <input type="number" value={threshold} onChange={(e) => setThreshold(Number(e.target.value))} step={0.5} min={0}
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--accent)]/30" />
+              className="w-full rounded-[10px] border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--accent)]/30" />
           </div>
           <div className="flex items-end">
-            <button onClick={addAlert} disabled={!selectedPoolId} className="w-full rounded-lg bg-[var(--accent)] px-4 py-2 text-[12px] font-medium text-white transition-all hover:bg-[var(--accent)]/80 disabled:cursor-not-allowed disabled:opacity-40">+ Add Alert</button>
+            <button onClick={addAlert} disabled={!selectedPoolId} className="w-full rounded-[10px] bg-[var(--accent)] px-4 py-2 text-[12px] font-medium text-white transition-all hover:bg-[var(--accent)]/80 disabled:cursor-not-allowed disabled:opacity-40">+ Add Alert</button>
           </div>
         </div>
       </div>
 
-      <div className="panel p-0 overflow-hidden">
+      <div className="card-flat p-0 overflow-hidden">
         <div className="border-b border-[var(--border)] px-5 py-3"><div className="text-[12px] font-semibold">Your Alerts ({alerts.length})</div></div>
         {alerts.length === 0 ? (
           <div className="flex h-[150px] items-center justify-center text-[12px] text-[var(--text-muted)]">No alerts set. Create one above to get notified when APY crosses your target.</div>

@@ -5,7 +5,7 @@ import type { ReactNode, ButtonHTMLAttributes } from 'react';
 
 export function Card({ children, className, style }: { children: ReactNode; className?: string; style?: React.CSSProperties }) {
   return (
-    <div className={cn('card-highlight rounded-[10px] border border-[var(--border)] bg-[var(--bg-card)] p-5 transition-all', className)} style={style}>
+    <div className={cn('card', className)} style={style}>
       {children}
     </div>
   );
@@ -20,17 +20,17 @@ export function CardTitle({ children, className }: { children: ReactNode; classN
 }
 
 const BADGE_VARIANTS = {
-  default: 'bg-white/[0.04] text-[var(--text-secondary)] border border-[var(--border)]',
-  success: 'bg-[var(--green-dim)] text-[var(--green)] border border-[var(--green)]/10',
-  warning: 'bg-[var(--gold-dim)] text-[var(--gold)] border border-[var(--gold)]/10',
-  danger: 'bg-[var(--red-dim)] text-[var(--red)] border border-[var(--red)]/10',
-  info: 'bg-[var(--accent-dim)] text-[var(--accent)] border border-[var(--accent)]/10',
-  chain: 'bg-[var(--blue-dim)] text-[var(--blue)] border border-[var(--blue)]/10',
+  default: 'bg-white/[0.04] text-[var(--text-secondary)]',
+  success: 'bg-[var(--green-dim)] text-[var(--green)]',
+  warning: 'bg-[var(--gold-dim)] text-[var(--gold)]',
+  danger: 'bg-[var(--red-dim)] text-[var(--red)]',
+  info: 'bg-[var(--accent-dim)] text-[var(--accent)]',
+  chain: 'bg-[var(--blue-dim)] text-[var(--blue)]',
 };
 
 export function Badge({ children, variant = 'default', className }: { children: ReactNode; variant?: keyof typeof BADGE_VARIANTS; className?: string }) {
   return (
-    <span className={cn('inline-flex items-center rounded-md px-2 py-0.5 text-[10px] font-semibold', BADGE_VARIANTS[variant], className)}>
+    <span className={cn('badge', BADGE_VARIANTS[variant], className)}>
       {children}
     </span>
   );
@@ -38,14 +38,14 @@ export function Badge({ children, variant = 'default', className }: { children: 
 
 export function Button({ children, className, variant = 'primary', size = 'md', ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'ghost' | 'danger'; size?: 'sm' | 'md' | 'lg' }) {
   const variants = {
-    primary: 'bg-[var(--accent)] text-white hover:bg-[var(--accent-bright)] shadow-lg shadow-[var(--accent)]/10',
+    primary: 'bg-[var(--accent)] text-white hover:bg-[var(--accent-bright)]',
     secondary: 'bg-white/[0.04] text-[var(--text-secondary)] border border-[var(--border)] hover:bg-white/[0.07] hover:text-[var(--text-primary)]',
     ghost: 'text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-white/[0.03]',
-    danger: 'bg-[var(--red-dim)] text-[var(--red)] border border-[var(--red)]/10 hover:bg-[var(--red)]/15',
+    danger: 'bg-[var(--red-dim)] text-[var(--red)] hover:bg-[var(--red)]/15',
   };
   const sizes = { sm: 'px-3 py-1.5 text-[11px]', md: 'px-4 py-2 text-[12px]', lg: 'px-5 py-2.5 text-[13px]' };
   return (
-    <button className={cn('inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed', variants[variant], sizes[size], className)} {...props}>
+    <button className={cn('inline-flex items-center justify-center gap-2 rounded-[10px] font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed', variants[variant], sizes[size], className)} {...props}>
       {children}
     </button>
   );

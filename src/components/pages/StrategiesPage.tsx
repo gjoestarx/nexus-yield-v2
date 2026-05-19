@@ -52,10 +52,10 @@ export function StrategiesPage({ pools, risks, rankings, mode, onSelectPool }: S
             const risk = riskMap.get(rank.poolId);
             if (!pool || !risk) return null;
             return (
-              <div key={rank.poolId} onClick={() => onSelectPool(pool)} className="panel group cursor-pointer p-4 transition-all hover:bg-white/[0.03] hover:shadow-lg">
+              <div key={rank.poolId} onClick={() => onSelectPool(pool)} className="card-flat group cursor-pointer p-4 transition-all hover:bg-white/[0.03] hover:shadow-lg">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={`flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold ${i < 3 ? 'bg-gradient-to-br from-amber-400/30 to-amber-600/10 text-amber-400' : 'bg-white/10 text-[var(--text-muted)]'}`}>
+                    <div className={`flex h-8 w-8 items-center justify-center rounded-[10px] text-sm font-bold ${i < 3 ? 'bg-gradient-to-br from-amber-400/30 to-amber-600/10 text-amber-400' : 'bg-white/10 text-[var(--text-muted)]'}`}>
                       {i + 1}
                     </div>
                     <div>
@@ -87,7 +87,7 @@ export function StrategiesPage({ pools, risks, rankings, mode, onSelectPool }: S
               const pool = poolMap.get(rank.poolId);
               if (!pool) return null;
               return (
-                <div key={rank.poolId} className="panel flex items-center justify-between border-[var(--red)]/20 bg-[var(--red-dim)] p-3">
+                <div key={rank.poolId} className="card-flat flex items-center justify-between border-[var(--red)]/20 bg-[var(--red-dim)] p-3">
                   <div>
                     <div className="text-sm font-medium">{pool.symbol}</div>
                     <div className="text-[10px] text-[var(--text-muted)]">{pool.protocol} · {CHAIN_LABELS[pool.chain]}</div>

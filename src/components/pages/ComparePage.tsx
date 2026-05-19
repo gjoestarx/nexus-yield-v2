@@ -74,7 +74,7 @@ export function ComparePage({ pools, risks }: ComparePageProps) {
 
   return (
     <div className="space-y-5 animate-in">
-      <div className="panel p-4">
+      <div className="card-flat p-4">
         <div className="mb-3 flex items-center justify-between">
           <div className="text-[12px] font-semibold">Compare Pools (up to 4)</div>
           <div className="text-[10px] text-[var(--text-muted)]">{selectedIds.length}/4 selected</div>
@@ -83,9 +83,9 @@ export function ComparePage({ pools, risks }: ComparePageProps) {
           <div className="relative flex-1">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">⌕</span>
             <input type="text" placeholder="Search pools to compare..." value={search} onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] outline-none focus:border-[var(--accent)]/30" />
+              className="w-full rounded-[10px] border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] outline-none focus:border-[var(--accent)]/30" />
             {searchResults.length > 0 && (
-              <div className="absolute left-0 right-0 top-full z-10 mt-1 max-h-[250px] overflow-y-auto rounded-lg border border-[var(--border)] bg-[var(--bg-card)] shadow-xl">
+              <div className="absolute left-0 right-0 top-full z-10 mt-1 max-h-[250px] overflow-y-auto rounded-[10px] border border-[var(--border)] bg-[var(--bg-card)] shadow-xl">
                 {searchResults.map((pool) => (
                   <div key={pool.id} onClick={() => addPool(pool.id)} className="flex cursor-pointer items-center justify-between px-3 py-2 text-[11px] hover:bg-white/[0.03]">
                     <div><span className="font-medium">{pool.symbol}</span><span className="ml-2 text-[var(--text-muted)]">{pool.protocol} · {CHAIN_LABELS[pool.chain]}</span></div>
@@ -99,7 +99,7 @@ export function ComparePage({ pools, risks }: ComparePageProps) {
         {selectedPools.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
             {selectedPools.map((pool, i) => (
-              <div key={pool.id} className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-[11px]" style={{ background: `${COLORS[i]}15`, border: `1px solid ${COLORS[i]}30` }}>
+              <div key={pool.id} className="flex items-center gap-2 rounded-[10px] px-3 py-1.5 text-[11px]" style={{ background: `${COLORS[i]}15`, border: `1px solid ${COLORS[i]}30` }}>
                 <div className="h-2 w-2 rounded-full" style={{ background: COLORS[i] }} />
                 <span className="font-medium">{pool.symbol}</span>
                 <span className="text-[var(--text-muted)]">{pool.protocol}</span>
@@ -111,7 +111,7 @@ export function ComparePage({ pools, risks }: ComparePageProps) {
       </div>
 
       {selectedPools.length >= 2 && (
-        <div className="panel p-0 overflow-hidden">
+        <div className="card-flat p-0 overflow-hidden">
           <div className="border-b border-[var(--border)] px-5 py-3"><div className="text-[12px] font-semibold">Side-by-Side Comparison</div></div>
           <div className="overflow-x-auto">
             <table className="w-full text-[12px]">
@@ -147,7 +147,7 @@ export function ComparePage({ pools, risks }: ComparePageProps) {
       )}
 
       {selectedPools.length >= 2 && chartData.length > 0 && (
-        <div className="panel p-0 overflow-hidden">
+        <div className="card-flat p-0 overflow-hidden">
           <div className="border-b border-[var(--border)] px-5 py-3">
             <div className="text-[12px] font-semibold">Historical APY Comparison</div>
             <div className="text-[10px] text-[var(--text-muted)]">{loadingHistory ? 'Loading history...' : `${chartData.length} data points`}</div>
@@ -158,7 +158,7 @@ export function ComparePage({ pools, risks }: ComparePageProps) {
                 <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
                 <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => { const d = new Date(v); return `${d.getMonth() + 1}/${d.getFullYear().toString().slice(2)}`; }} interval="preserveStartEnd" />
                 <YAxis tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
-                <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 }} labelFormatter={(l) => new Date(l).toLocaleDateString()} formatter={(v, name) => [`${Number(v).toFixed(2)}%`, name]} />
+                <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, fontSize: 11 }} labelFormatter={(l) => new Date(l).toLocaleDateString()} formatter={(v, name) => [`${Number(v).toFixed(2)}%`, name]} />
                 {selectedPools.map((pool, i) => (<Area key={pool.id} type="monotone" dataKey={pool.symbol} stroke={COLORS[i]} fill={COLORS[i]} fillOpacity={0.05} strokeWidth={1.5} dot={false} />))}
               </AreaChart>
             </ResponsiveContainer>
@@ -170,7 +170,7 @@ export function ComparePage({ pools, risks }: ComparePageProps) {
       )}
 
       {selectedPools.length < 2 && (
-        <div className="panel flex h-[200px] items-center justify-center">
+        <div className="card-flat flex h-[200px] items-center justify-center">
           <div className="text-center text-[var(--text-muted)]"><div className="text-2xl opacity-30">⇄</div><div className="mt-2 text-[12px]">Select at least 2 pools to compare</div></div>
         </div>
       )}

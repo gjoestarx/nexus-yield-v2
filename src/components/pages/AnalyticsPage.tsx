@@ -74,11 +74,11 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
     return RISK_COLORS['Very High'];
   };
 
-  const tooltipStyle = { background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 };
+  const tooltipStyle = { background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, fontSize: 11 };
 
   return (
     <div className="space-y-4 animate-in">
-      <Card className="panel-glass glow-accent p-0 overflow-hidden">
+      <Card className="card-glass glow-accent p-0 overflow-hidden">
         <div className="border-b border-[var(--border)] px-5 py-3">
           <div className="text-sm font-semibold">APY vs Risk Score</div>
           <div className="text-[10px] text-[var(--text-muted)]">Bubble size = TVL · Color = Risk category</div>
@@ -93,7 +93,7 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
                 if (!payload?.length) return null;
                 const d = payload[0].payload;
                 return (
-                  <div className="panel-glass rounded-xl px-4 py-3 shadow-xl">
+                  <div className="card-glass rounded-[16px] px-4 py-3 shadow-xl">
                     <div className="text-sm font-bold">{d.name}</div>
                     <div className="text-[10px] text-[var(--text-muted)]">{d.protocol} · {CHAIN_LABELS[d.chain]}</div>
                     <div className="mt-2 space-y-0.5 text-xs">
@@ -117,7 +117,7 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
       <PoolHeatmap pools={pools} risks={risks} />
 
       <div className="grid gap-4 lg:grid-cols-3">
-        <Card className="panel-glass">
+        <Card className="card-glass">
           <div className="mb-3 text-sm font-semibold">Risk Distribution</div>
           <div className="h-[220px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -127,7 +127,7 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
                 <YAxis tick={{ fontSize: 10 }} />
                 <Tooltip contentStyle={tooltipStyle} content={({ payload }) => {
                   if (!payload?.length) return null;
-                  return <div className="panel-glass rounded-lg px-3 py-2 text-xs">{payload[0].payload.range}: {payload[0].value} pools</div>;
+                  return <div className="card-glass rounded-[10px] px-3 py-2 text-xs">{payload[0].payload.range}: {payload[0].value} pools</div>;
                 }} />
                 <Bar dataKey="count" radius={[3, 3, 0, 0]}>
                   {histogramData.map((_, i) => <Cell key={i} fill={`hsl(${180 + i * 12}, 70%, ${50 + i * 3}%)`} fillOpacity={0.7} />)}
@@ -137,7 +137,7 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
           </div>
         </Card>
 
-        <Card className="panel-glass">
+        <Card className="card-glass">
           <div className="mb-3 text-sm font-semibold">APY by Chain</div>
           <div className="h-[220px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -148,7 +148,7 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
                 <Tooltip contentStyle={tooltipStyle} content={({ payload }) => {
                   if (!payload?.length) return null;
                   const d = payload[0].payload;
-                  return <div className="panel-glass rounded-lg px-3 py-2 text-xs">{d.chain}: avg {d.avg}% · max {d.max}%</div>;
+                  return <div className="card-glass rounded-[10px] px-3 py-2 text-xs">{d.chain}: avg {d.avg}% · max {d.max}%</div>;
                 }} />
                 <Bar dataKey="avg" name="Avg APY" radius={[4, 4, 0, 0]}>
                   {apyByChain.map((entry, i) => <Cell key={i} fill={entry.color} fillOpacity={0.7} />)}
@@ -158,7 +158,7 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
           </div>
         </Card>
 
-        <Card className="panel-glass">
+        <Card className="card-glass">
           <div className="mb-3 text-sm font-semibold">Top 5 Pool Comparison</div>
           <div className="h-[220px]">
             <ResponsiveContainer width="100%" height="100%">

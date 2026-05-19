@@ -62,12 +62,12 @@ export function SimulatorPage({ pools, risks, mode }: SimulatorPageProps) {
   return (
     <div className="space-y-6 animate-in">
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card className="panel-glass glow-accent">
+        <Card className="card-glass glow-accent">
           <div className="mb-3 text-sm font-semibold">Select Pool</div>
           <div className="relative mb-3">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">⌕</span>
             <input type="text" placeholder="Search pools..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-[var(--border)] bg-black/30 py-2 pl-9 pr-4 text-sm text-white placeholder-[var(--text-muted)] outline-none focus:border-[var(--accent)]/30" />
+              className="w-full rounded-[10px] border border-[var(--border)] bg-black/30 py-2 pl-9 pr-4 text-sm text-white placeholder-[var(--text-muted)] outline-none focus:border-[var(--accent)]/30" />
           </div>
           <div className="max-h-[240px] space-y-1 overflow-y-auto">
             {searchResults.map((pool) => {
@@ -75,7 +75,7 @@ export function SimulatorPage({ pools, risks, mode }: SimulatorPageProps) {
               const isSelected = pool.id === selectedPoolId;
               return (
                 <div key={pool.id} onClick={() => setSelectedPoolId(pool.id)}
-                  className={`flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-xs transition-all ${isSelected ? 'bg-[var(--accent)]/20 ring-1 ring-[var(--accent)]/30' : 'hover:bg-white/5'}`}>
+                  className={`flex cursor-pointer items-center justify-between rounded-[10px] px-3 py-2 text-xs transition-all ${isSelected ? 'bg-[var(--accent)]/20 ring-1 ring-[var(--accent)]/30' : 'hover:bg-white/5'}`}>
                   <div><span className="font-medium">{pool.symbol}</span><span className="ml-2 text-[var(--text-muted)]">{pool.protocol}</span></div>
                   <div className="flex items-center gap-3">
                     <span className="text-[var(--green)]">{formatPct(pool.apy)}</span>
@@ -86,20 +86,20 @@ export function SimulatorPage({ pools, risks, mode }: SimulatorPageProps) {
             })}
           </div>
           {selectedPool && (
-            <div className="mt-3 rounded-lg bg-[var(--accent)]/10 p-3 text-xs">
+            <div className="mt-3 rounded-[10px] bg-[var(--accent)]/10 p-3 text-xs">
               <div className="font-semibold text-[var(--accent)]">{selectedPool.symbol}</div>
               <div className="text-[var(--text-muted)]">{selectedPool.protocol} · {CHAIN_LABELS[selectedPool.chain]} · TVL {formatUsd(selectedPool.tvlUsd)}</div>
             </div>
           )}
         </Card>
 
-        <Card className="panel-glass glow-rose">
+        <Card className="card-glass glow-rose">
           <div className="mb-3 text-sm font-semibold">Simulation Parameters</div>
           <div className="space-y-4">
             <div>
               <label className="mb-1.5 block text-xs text-[var(--text-muted)]">Capital (USD)</label>
               <input type="number" value={capital} onChange={(e) => setCapital(Number(e.target.value))}
-                className="w-full rounded-lg border border-[var(--border)] bg-black/30 px-4 py-2.5 text-sm text-white outline-none focus:border-[var(--accent)]/30" />
+                className="w-full rounded-[10px] border border-[var(--border)] bg-black/30 px-4 py-2.5 text-sm text-white outline-none focus:border-[var(--accent)]/30" />
               <div className="mt-2 flex gap-2">
                 {presets.map((v) => (
                   <button key={v} onClick={() => setCapital(v)}
@@ -123,14 +123,14 @@ export function SimulatorPage({ pools, risks, mode }: SimulatorPageProps) {
         </Card>
       </div>
 
-      {error && <div className="panel-glass border-[var(--red)]/30 bg-[var(--red-dim)] p-4 text-sm text-[var(--red)]">⚠ {error}</div>}
+      {error && <div className="card-glass border-[var(--red)]/30 bg-[var(--red-dim)] p-4 text-sm text-[var(--red)]">⚠ {error}</div>}
 
       {result && selectedPool && (
         <div className="space-y-4 animate-in">
           <div className="flex items-center gap-3">
-            <button onClick={handleSave} className="rounded-lg bg-[var(--green)]/20 px-4 py-2 text-[12px] font-medium text-[var(--green)] transition-all hover:bg-[var(--green)]/30">💾 Save Simulation</button>
+            <button onClick={handleSave} className="rounded-[10px] bg-[var(--green)]/20 px-4 py-2 text-[12px] font-medium text-[var(--green)] transition-all hover:bg-[var(--green)]/30">💾 Save Simulation</button>
             {saveMessage && <span className="text-[11px] text-[var(--green)] animate-in">{saveMessage}</span>}
-            <button onClick={() => setShowSaved(!showSaved)} className="rounded-lg bg-white/[0.05] px-4 py-2 text-[12px] font-medium text-[var(--text-muted)] transition-all hover:bg-white/[0.10]">📂 Saved ({savedSims.length})</button>
+            <button onClick={() => setShowSaved(!showSaved)} className="rounded-[10px] bg-white/[0.05] px-4 py-2 text-[12px] font-medium text-[var(--text-muted)] transition-all hover:bg-white/[0.10]">📂 Saved ({savedSims.length})</button>
           </div>
 
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -146,7 +146,7 @@ export function SimulatorPage({ pools, risks, mode }: SimulatorPageProps) {
             <ResultStat label="Gas Impact" value={`${result.simulation.gasImpact.toFixed(2)}%`} color="text-[var(--text-muted)]" />
           </div>
 
-          <Card className="panel-glass glow-gold p-0 overflow-hidden">
+          <Card className="card-glass glow-gold p-0 overflow-hidden">
             <div className="border-b border-[var(--border)] px-5 py-3">
               <div className="text-sm font-semibold">Portfolio Growth Projection</div>
               <div className="text-[10px] text-[var(--text-muted)]">{formatUsd(capital)} → {formatUsd(result.simulation.expectedReturn)} in {days} days</div>
@@ -166,7 +166,7 @@ export function SimulatorPage({ pools, risks, mode }: SimulatorPageProps) {
                   <Tooltip content={({ payload }) => {
                     if (!payload?.length) return null;
                     const d = payload[0].payload;
-                    return <div className="panel-glass rounded-lg px-3 py-2 text-xs"><div>Day {d.day}</div><div className="font-mono text-[var(--accent)]">{formatUsd(d.value)}</div></div>;
+                    return <div className="card-glass rounded-[10px] px-3 py-2 text-xs"><div>Day {d.day}</div><div className="font-mono text-[var(--accent)]">{formatUsd(d.value)}</div></div>;
                   }} />
                   <ReferenceLine y={capital} stroke="#4a5f82" strokeDasharray="5 5" />
                   <Area type="monotone" dataKey="value" stroke="#a78bfa" strokeWidth={2} fill="url(#gradExpected)" />
@@ -175,14 +175,14 @@ export function SimulatorPage({ pools, risks, mode }: SimulatorPageProps) {
             </div>
           </Card>
 
-          <Card className="panel-glass">
+          <Card className="card-glass">
             <div className="mb-2 text-sm font-semibold">{result.explanation.headline}</div>
             <ul className="space-y-1 text-xs text-[var(--text-muted)]">
               {result.explanation.insights.map((insight, i) => (
                 <li key={i} className="flex items-start gap-2"><span className="mt-0.5 text-[var(--accent)]">▸</span>{insight}</li>
               ))}
             </ul>
-            <div className="mt-3 rounded-lg bg-[var(--accent)]/10 p-3 text-xs">
+            <div className="mt-3 rounded-[10px] bg-[var(--accent)]/10 p-3 text-xs">
               <div className="font-semibold text-[var(--accent)]">Recommendation</div>
               <div className="mt-1 text-[var(--text-muted)]">{result.explanation.recommendation}</div>
             </div>
@@ -192,7 +192,7 @@ export function SimulatorPage({ pools, risks, mode }: SimulatorPageProps) {
       )}
 
       {showSaved && (
-        <Card className="panel-glass p-0 overflow-hidden animate-in">
+        <Card className="card-glass p-0 overflow-hidden animate-in">
           <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-3">
             <div className="text-sm font-semibold">📂 Saved Simulations ({savedSims.length}/{MAX_SAVED_SIMS})</div>
             <button onClick={() => setShowSaved(false)} className="text-[var(--text-muted)] hover:text-white text-sm">✕</button>
@@ -225,7 +225,7 @@ export function SimulatorPage({ pools, risks, mode }: SimulatorPageProps) {
       )}
 
       {!result && !loading && (
-        <div className="panel-glass flex h-[300px] items-center justify-center">
+        <div className="card-glass flex h-[300px] items-center justify-center">
           <div className="text-center">
             <div className="text-4xl opacity-30">▷</div>
             <div className="mt-2 text-sm text-[var(--text-muted)]">Select a pool and run simulation to see results</div>
@@ -238,7 +238,7 @@ export function SimulatorPage({ pools, risks, mode }: SimulatorPageProps) {
 
 function ResultStat({ label, value, color }: { label: string; value: string; color: string }) {
   return (
-    <div className="panel-glass p-4">
+    <div className="card-glass p-4">
       <div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">{label}</div>
       <div className={`mt-1 text-xl font-bold ${color}`}>{value}</div>
     </div>
