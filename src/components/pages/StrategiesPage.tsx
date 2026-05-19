@@ -21,8 +21,8 @@ export function StrategiesPage({ pools, risks, rankings, mode, onSelectPool }: S
   const top10 = useMemo(() => nonTrap.slice(0, 10), [nonTrap]);
 
   const modeConfig = {
-    conservative: { title: '🛡 Conservative Strategy', desc: 'Minimize risk. Prioritize capital preservation with stable, predictable yields.', weights: 'α=0.2 · β=0.6 · γ=0.2', gradient: 'from-cyan-500/15 to-teal-500/5', accent: 'text-cyan-400' },
-    balanced: { title: '⚖ Balanced Strategy', desc: 'Optimize risk-reward ratio. Moderate allocation across diversified pools.', weights: 'α=0.4 · β=0.3 · γ=0.3', gradient: 'from-teal-500/15 to-green-500/5', accent: 'text-teal-400' },
+    conservative: { title: '🛡 Conservative Strategy', desc: 'Minimize risk. Prioritize capital preservation with stable, predictable yields.', weights: 'α=0.2 · β=0.6 · γ=0.2', gradient: 'from-accent/15 to-rose/5', accent: 'text-cyan-400' },
+    balanced: { title: '⚖ Balanced Strategy', desc: 'Optimize risk-reward ratio. Moderate allocation across diversified pools.', weights: 'α=0.4 · β=0.3 · γ=0.3', gradient: 'from-rose/15 to-green-500/5', accent: 'text-teal-400' },
     aggressive: { title: '🔥 Aggressive Strategy', desc: 'Maximize returns. Higher risk tolerance for outsized yield opportunities.', weights: 'α=0.7 · β=0.15 · γ=0.15', gradient: 'from-amber-500/15 to-red-500/5', accent: 'text-amber-400' },
   };
 
@@ -30,7 +30,7 @@ export function StrategiesPage({ pools, risks, rankings, mode, onSelectPool }: S
 
   return (
     <div className="space-y-6 animate-in">
-      <div className={`panel-glass glow-cyan bg-gradient-to-r ${cfg.gradient} p-6`}>
+      <div className={`panel-glass glow-accent bg-gradient-to-r ${cfg.gradient} p-6`}>
         <div className="flex items-start justify-between">
           <div>
             <h2 className={`text-xl font-bold ${cfg.accent}`}>{cfg.title}</h2>

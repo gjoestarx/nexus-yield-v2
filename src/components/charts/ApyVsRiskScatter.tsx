@@ -32,8 +32,8 @@ export function ApyVsRiskScatter({ pools, risks, onSelect }: ApyVsRiskScatterPro
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
             <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-            <XAxis dataKey="risk" name="Risk Score" domain={[0, 100]} tick={{ fontSize: 11, fill: '#4a5f82' }} label={{ value: 'Risk Score', position: 'insideBottom', offset: -5, style: { fontSize: 11, fill: '#4a5f82' } }} />
-            <YAxis dataKey="apy" name="APY %" tick={{ fontSize: 11, fill: '#4a5f82' }} label={{ value: 'APY %', angle: -90, position: 'insideLeft', style: { fontSize: 11, fill: '#4a5f82' } }} />
+            <XAxis dataKey="risk" name="Risk Score" domain={[0, 100]} tick={{ fontSize: 11, fill: '#5a5a6e' }} label={{ value: 'Risk Score', position: 'insideBottom', offset: -5, style: { fontSize: 11, fill: '#5a5a6e' } }} />
+            <YAxis dataKey="apy" name="APY %" tick={{ fontSize: 11, fill: '#5a5a6e' }} label={{ value: 'APY %', angle: -90, position: 'insideLeft', style: { fontSize: 11, fill: '#5a5a6e' } }} />
             <Tooltip cursor={{ strokeDasharray: '3 3' }} content={({ payload }) => {
               if (!payload?.length) return null;
               const d = payload[0].payload;

@@ -15,7 +15,7 @@ const RADAR_AXES = [
   { key: 'liquidity', label: 'Liquidity', max: 1 },
 ];
 
-const COLORS = ['#06b6d4', '#14b8a6', '#22c55e', '#f59e0b', '#a78bfa'];
+const COLORS = ['#a78bfa', '#fb7185', '#22c55e', '#f59e0b', '#a78bfa'];
 
 export function PoolRadarChart({ pools, risks, selectedIds }: PoolRadarChartProps) {
   const riskMap = useMemo(() => new Map(risks.map((r) => [r.poolId, r])), [risks]);
@@ -52,7 +52,7 @@ export function PoolRadarChart({ pools, risks, selectedIds }: PoolRadarChartProp
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart data={data} cx="50%" cy="50%" outerRadius="75%">
             <PolarGrid stroke="rgba(148,163,184,0.15)" />
-            <PolarAngleAxis dataKey="axis" tick={{ fontSize: 11, fill: '#4a5f82' }} />
+            <PolarAngleAxis dataKey="axis" tick={{ fontSize: 11, fill: '#5a5a6e' }} />
             <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fontSize: 10 }} />
             {displayPools.map((pool, i) => (
               <Radar key={pool.id} name={pool.symbol} dataKey={pool.symbol} stroke={COLORS[i % COLORS.length]} fill={COLORS[i % COLORS.length]} fillOpacity={0.15} strokeWidth={2} />

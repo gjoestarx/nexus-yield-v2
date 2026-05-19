@@ -18,9 +18,9 @@ export function StatsBar({ stats, loading }: StatsBarProps) {
   }
 
   const items = [
-    { label: 'Total Pools', value: stats.totalPools.toLocaleString(), color: 'var(--cyan)' },
+    { label: 'Total Pools', value: stats.totalPools.toLocaleString(), color: 'var(--accent)' },
     { label: 'Avg APY', value: formatPct(stats.avgApy), color: 'var(--green)' },
-    { label: 'Avg Risk Score', value: `${stats.avgRisk.toFixed(1)}/100`, color: 'var(--amber)' },
+    { label: 'Avg Risk Score', value: `${stats.avgRisk.toFixed(1)}/100`, color: 'var(--gold)' },
     { label: 'Trap Pools', value: String(stats.trapPools), color: 'var(--red)' },
   ];
 

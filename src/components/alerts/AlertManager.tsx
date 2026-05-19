@@ -60,16 +60,16 @@ export function AlertManager({ pools, risks, onAlertCountChange }: AlertManagerP
   return (
     <div className="space-y-5 animate-in">
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <div className="panel p-4" style={{ borderLeft: '3px solid var(--cyan)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Total Alerts</div><div className="mt-1 text-[22px] font-bold text-[var(--cyan)]">{alerts.length}</div></div>
+        <div className="panel p-4" style={{ borderLeft: '3px solid var(--accent)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Total Alerts</div><div className="mt-1 text-[22px] font-bold text-[var(--accent)]">{alerts.length}</div></div>
         <div className="panel p-4" style={{ borderLeft: '3px solid var(--green)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Active</div><div className="mt-1 text-[22px] font-bold text-[var(--green)]">{activeAlertCount}</div></div>
-        <div className="panel p-4" style={{ borderLeft: '3px solid var(--amber)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Triggered</div><div className="mt-1 text-[22px] font-bold text-[var(--amber)]">{triggeredCount}</div></div>
-        <div className="panel p-4" style={{ borderLeft: '3px solid var(--purple)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Dismissed</div><div className="mt-1 text-[22px] font-bold text-[var(--purple)]">{dismissedIds.size}</div></div>
+        <div className="panel p-4" style={{ borderLeft: '3px solid var(--gold)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Triggered</div><div className="mt-1 text-[22px] font-bold text-[var(--gold)]">{triggeredCount}</div></div>
+        <div className="panel p-4" style={{ borderLeft: '3px solid var(--gold)' }}><div className="text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Dismissed</div><div className="mt-1 text-[22px] font-bold text-[var(--gold)]">{dismissedIds.size}</div></div>
       </div>
 
       {triggeredCount > 0 && (
-        <div className="panel bg-[var(--amber-dim)] p-4">
-          <div className="mb-2 flex items-center gap-2 text-[12px] font-semibold text-[var(--amber)]">
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[var(--amber)] text-[10px] font-bold text-black">{triggeredCount}</span>
+        <div className="panel bg-[var(--gold-dim)] p-4">
+          <div className="mb-2 flex items-center gap-2 text-[12px] font-semibold text-[var(--gold)]">
+            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[var(--gold)] text-[10px] font-bold text-black">{triggeredCount}</span>
             Alert{triggeredCount > 1 ? 's' : ''} Triggered
           </div>
           <div className="space-y-1">
@@ -77,9 +77,9 @@ export function AlertManager({ pools, risks, onAlertCountChange }: AlertManagerP
               const pool = pools.find((p) => p.id === alert.poolId);
               return (
                 <div key={alert.id} className="flex items-center justify-between rounded-lg bg-black/20 px-3 py-2 text-[11px]">
-                  <div><span className="font-medium text-[var(--amber)]">{alert.poolSymbol}</span><span className="text-[var(--text-muted)]"> APY {alert.direction === 'above' ? '≥' : '≤'} {formatPct(alert.threshold)} → now <span className="font-mono text-[var(--green)]">{pool ? formatPct(pool.apy) : '—'}</span></span></div>
+                  <div><span className="font-medium text-[var(--gold)]">{alert.poolSymbol}</span><span className="text-[var(--text-muted)]"> APY {alert.direction === 'above' ? '≥' : '≤'} {formatPct(alert.threshold)} → now <span className="font-mono text-[var(--green)]">{pool ? formatPct(pool.apy) : '—'}</span></span></div>
                   <div className="flex gap-2">
-                    <button onClick={() => dismissAlert(alert.id)} className="rounded-md bg-[var(--amber)]/20 px-2 py-1 text-[10px] text-[var(--amber)] hover:bg-[var(--amber)]/30">Dismiss</button>
+                    <button onClick={() => dismissAlert(alert.id)} className="rounded-md bg-[var(--gold)]/20 px-2 py-1 text-[10px] text-[var(--gold)] hover:bg-[var(--gold)]/30">Dismiss</button>
                     <button onClick={() => removeAlert(alert.id)} className="rounded-md bg-[var(--red)]/20 px-2 py-1 text-[10px] text-[var(--red)] hover:bg-[var(--red)]/30">Remove</button>
                   </div>
                 </div>
@@ -94,7 +94,7 @@ export function AlertManager({ pools, risks, onAlertCountChange }: AlertManagerP
         <div className="relative mb-3">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">⌕</span>
           <input type="text" placeholder="Search pools..." value={search} onChange={(e) => { setSearch(e.target.value); setSelectedPoolId(''); }}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] outline-none focus:border-[var(--cyan)]/50" />
+            className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] outline-none focus:border-[var(--accent)]/30" />
         </div>
         {searchResults.length > 0 && !selectedPoolId && (
           <div className="mb-3 space-y-0.5 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] p-1">
@@ -118,10 +118,10 @@ export function AlertManager({ pools, risks, onAlertCountChange }: AlertManagerP
           <div>
             <label className="mb-1 block text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">APY Threshold (%)</label>
             <input type="number" value={threshold} onChange={(e) => setThreshold(Number(e.target.value))} step={0.5} min={0}
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--cyan)]/50" />
+              className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--accent)]/30" />
           </div>
           <div className="flex items-end">
-            <button onClick={addAlert} disabled={!selectedPoolId} className="w-full rounded-lg bg-[var(--cyan)] px-4 py-2 text-[12px] font-medium text-white transition-all hover:bg-[var(--cyan)]/80 disabled:cursor-not-allowed disabled:opacity-40">+ Add Alert</button>
+            <button onClick={addAlert} disabled={!selectedPoolId} className="w-full rounded-lg bg-[var(--accent)] px-4 py-2 text-[12px] font-medium text-white transition-all hover:bg-[var(--accent)]/80 disabled:cursor-not-allowed disabled:opacity-40">+ Add Alert</button>
           </div>
         </div>
       </div>
@@ -135,12 +135,12 @@ export function AlertManager({ pools, risks, onAlertCountChange }: AlertManagerP
             {alerts.map((alert) => {
               const pool = pools.find((p) => p.id === alert.poolId); const isTriggered = triggeredIds.has(alert.id);
               return (
-                <div key={alert.id} className={`flex items-center justify-between px-5 py-3 transition-colors ${isTriggered ? 'bg-[var(--amber-dim)]' : 'hover:bg-white/[0.02]'}`}>
+                <div key={alert.id} className={`flex items-center justify-between px-5 py-3 transition-colors ${isTriggered ? 'bg-[var(--gold-dim)]' : 'hover:bg-white/[0.02]'}`}>
                   <div className="flex items-center gap-3">
                     <button onClick={() => toggleAlert(alert.id)} className={`text-[14px] ${alert.enabled ? 'text-[var(--green)]' : 'text-[var(--text-muted)]'}`}>{alert.enabled ? '🔔' : '🔕'}</button>
                     <div className="h-2 w-2 rounded-full" style={{ background: CHAIN_COLORS[pool?.chain ?? 'ethereum'] }} />
                     <div>
-                      <div className="flex items-center gap-2 text-[12px] font-medium">{alert.poolSymbol}{isTriggered && (<span className="inline-flex items-center rounded-full bg-[var(--amber)] px-2 py-0.5 text-[9px] font-bold text-black">TRIGGERED</span>)}</div>
+                      <div className="flex items-center gap-2 text-[12px] font-medium">{alert.poolSymbol}{isTriggered && (<span className="inline-flex items-center rounded-full bg-[var(--gold)] px-2 py-0.5 text-[9px] font-bold text-black">TRIGGERED</span>)}</div>
                       <div className="text-[10px] text-[var(--text-muted)]">{pool?.protocol ?? 'Unknown'} · {CHAIN_LABELS[pool?.chain ?? 'ethereum']}</div>
                     </div>
                   </div>

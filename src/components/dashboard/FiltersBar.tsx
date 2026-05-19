@@ -43,7 +43,7 @@ export function FiltersBar({ filters, onUpdate, onRefresh, loading }: FiltersBar
       <div className="flex gap-1 rounded-lg bg-[var(--bg-primary)] p-1">
         {MODES.map((m) => (
           <button key={m.value} onClick={() => onUpdate({ mode: m.value })}
-            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${filters.mode === m.value ? 'bg-[var(--cyan-dim)] text-[var(--cyan)] shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}`}>
+            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${filters.mode === m.value ? 'bg-[var(--accent-dim)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}`}>
             {m.emoji} {m.label}
           </button>
         ))}
@@ -51,7 +51,7 @@ export function FiltersBar({ filters, onUpdate, onRefresh, loading }: FiltersBar
       <div className="flex gap-2">
         {ALL_CHAINS.map((chain) => (
           <button key={chain} onClick={() => toggleChain(chain)}
-            className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${filters.chains.includes(chain) ? 'bg-[var(--cyan)] text-white' : 'bg-[var(--bg-primary)] text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}`}>
+            className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${filters.chains.includes(chain) ? 'bg-[var(--accent)] text-white' : 'bg-[var(--bg-primary)] text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}`}>
             {CHAIN_LABELS[chain]}
           </button>
         ))}

@@ -56,7 +56,7 @@ export function PoolTable({ pools, risks, rankings, onSelect, loading }: PoolTab
                     <td className="px-4 py-2.5 text-right font-mono text-xs font-semibold text-[var(--green)]">{formatPct(pool.apy)}</td>
                     <td className="px-4 py-2.5 text-right font-mono text-xs text-[var(--text-muted)]">{formatPct(pool.apyMean30d)}</td>
                     <td className="px-4 py-2.5 text-center">{risk && <Badge variant={risk.score < 30 ? 'success' : risk.score < 60 ? 'warning' : 'danger'}>{risk.score}</Badge>}</td>
-                    <td className="px-4 py-2.5 text-center"><div className="mx-auto h-1.5 w-14 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-[var(--cyan)]" style={{ width: `${pool.stabilityIndicator * 100}%` }} /></div></td>
+                    <td className="px-4 py-2.5 text-center"><div className="mx-auto h-1.5 w-14 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-[var(--accent)]" style={{ width: `${pool.stabilityIndicator * 100}%` }} /></div></td>
                     <td className="px-4 py-2.5 text-center font-mono text-xs font-semibold">{rank?.score.toFixed(3) ?? '—'}</td>
                     <td className="px-4 py-2.5 text-center">{rank?.isTrapPool ? <span className="text-xs">🪤</span> : pool.stablecoin ? <span className="text-xs">🟢</span> : <span className="text-xs">🔵</span>}</td>
                   </tr>

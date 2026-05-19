@@ -5,9 +5,9 @@ import type { StrategyMode } from '@/types';
 import { cn } from '@/utils';
 
 const MODES: { value: StrategyMode; label: string }[] = [
-  { value: 'conservative', label: '🛡 Conservative' },
-  { value: 'balanced', label: '⚖ Balanced' },
-  { value: 'aggressive', label: '⚡ Aggressive' },
+  { value: 'conservative', label: 'Conservative' },
+  { value: 'balanced', label: 'Balanced' },
+  { value: 'aggressive', label: 'Aggressive' },
 ];
 
 const REFRESH_OPTIONS = [
@@ -75,9 +75,9 @@ export function HeaderBar({
           onClick={() => setSearchOpen(!searchOpen)}
           className={cn(
             'flex h-8 w-8 items-center justify-center rounded-lg transition-all',
-            searchOpen ? 'bg-[var(--cyan-dim)] text-[var(--cyan)]' : 'text-[var(--text-muted)] hover:bg-[var(--bg-primary)] hover:text-[var(--text-secondary)]'
+            searchOpen ? 'bg-[var(--accent-dim)] text-[var(--accent)]' : 'text-[var(--text-muted)] hover:bg-[var(--bg-primary)] hover:text-[var(--text-secondary)]'
           )}
-          title="Search pools (Ctrl+K)"
+          title="Search pools"
         >
           <span className="text-sm">⌕</span>
         </button>
@@ -90,19 +90,19 @@ export function HeaderBar({
               value={localSearch}
               onChange={(e) => handleSearchInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="h-8 w-[280px] rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] pl-3 pr-8 text-[12px] text-white placeholder-[var(--text-muted)] outline-none focus:border-[var(--cyan)]/50 focus:ring-1 focus:ring-[var(--cyan)]/30"
+              className="h-8 w-[260px] rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] pl-3 pr-8 text-[12px] text-white placeholder-[var(--text-muted)] outline-none focus:border-[var(--accent)]/30"
             />
             {localSearch && (
               <div className="absolute right-8 flex items-center gap-1">
-                <span className="text-[10px] text-[var(--text-muted)]">{searchResultCount ?? 0} results</span>
+                <span className="text-[10px] text-[var(--text-muted)]">{searchResultCount ?? 0}</span>
               </div>
             )}
             <button onClick={clearSearch} className="absolute right-1.5 flex h-5 w-5 items-center justify-center rounded text-[var(--text-muted)] hover:text-white">✕</button>
           </div>
         )}
         <div>
-          <h1 className="text-[15px] font-semibold">{title}</h1>
-          {subtitle && <p className="text-[11px] text-[var(--text-muted)]">{subtitle}</p>}
+          <h1 className="text-[14px] font-semibold tracking-tight">{title}</h1>
+          {subtitle && <p className="text-[10px] text-[var(--text-muted)]">{subtitle}</p>}
         </div>
       </div>
 
@@ -111,7 +111,7 @@ export function HeaderBar({
           <button
             onClick={() => setRefreshDropdownOpen(!refreshDropdownOpen)}
             className={cn(
-              'flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[11px] font-medium transition-all',
+              'flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[10px] font-medium transition-all',
               refreshInterval > 0 ? 'bg-[var(--green-dim)] text-[var(--green)]' : 'text-[var(--text-muted)] hover:bg-[var(--bg-primary)] hover:text-[var(--text-secondary)]'
             )}
           >
@@ -122,14 +122,14 @@ export function HeaderBar({
           </button>
           {refreshDropdownOpen && (
             <div className="absolute right-0 top-full z-50 mt-1 w-36 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] shadow-lg">
-              <div className="px-3 py-2 text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Refresh Interval</div>
+              <div className="px-3 py-2 text-[10px] font-medium uppercase tracking-wider text-[var(--text-muted)]">Refresh</div>
               {REFRESH_OPTIONS.map((opt) => (
                 <button
                   key={opt.value}
                   onClick={() => { onRefreshIntervalChange?.(opt.value); setRefreshDropdownOpen(false); }}
                   className={cn(
                     'flex w-full items-center justify-between px-3 py-2 text-[12px] transition-colors',
-                    refreshInterval === opt.value ? 'bg-[var(--cyan-dim)] text-[var(--cyan)]' : 'text-[var(--text-secondary)] hover:bg-white/5'
+                    refreshInterval === opt.value ? 'bg-[var(--accent-dim)] text-[var(--accent)]' : 'text-[var(--text-secondary)] hover:bg-white/[0.03]'
                   )}
                 >
                   <span>{opt.label}</span>
@@ -151,8 +151,8 @@ export function HeaderBar({
               key={m.value}
               onClick={() => onModeChange(m.value)}
               className={cn(
-                'rounded-md px-3 py-1.5 text-[11px] font-medium transition-all',
-                mode === m.value ? 'bg-[var(--cyan-dim)] text-[var(--cyan)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
+                'rounded-md px-3 py-1.5 text-[10px] font-medium transition-all',
+                mode === m.value ? 'bg-[var(--accent-dim)] text-[var(--accent)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
               )}
             >
               {m.label}

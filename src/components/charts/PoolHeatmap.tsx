@@ -50,7 +50,7 @@ export function PoolHeatmap({ pools, risks }: PoolHeatmapProps) {
   }, [cells]);
 
   return (
-    <Card className="panel-glass glow-green p-0 overflow-hidden">
+    <Card className="panel-glass glow-gold p-0 overflow-hidden">
       <div className="border-b border-[var(--border)] px-5 py-3">
         <div className="text-sm font-semibold">Pool Heatmap</div>
         <div className="text-[10px] text-[var(--text-muted)]">Color = APY/Risk ratio · Size = TVL · {sortedCells.length} pools</div>

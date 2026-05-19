@@ -36,8 +36,8 @@ export function RiskHistogram({ risks }: RiskHistogramProps) {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
             <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-            <XAxis dataKey="range" tick={{ fontSize: 11, fill: '#4a5f82' }} label={{ value: 'Risk Score Range', position: 'insideBottom', offset: -5, style: { fontSize: 11, fill: '#4a5f82' } }} />
-            <YAxis tick={{ fontSize: 11, fill: '#4a5f82' }} label={{ value: 'Pool Count', angle: -90, position: 'insideLeft', style: { fontSize: 11, fill: '#4a5f82' } }} />
+            <XAxis dataKey="range" tick={{ fontSize: 11, fill: '#5a5a6e' }} label={{ value: 'Risk Score Range', position: 'insideBottom', offset: -5, style: { fontSize: 11, fill: '#5a5a6e' } }} />
+            <YAxis tick={{ fontSize: 11, fill: '#5a5a6e' }} label={{ value: 'Pool Count', angle: -90, position: 'insideLeft', style: { fontSize: 11, fill: '#5a5a6e' } }} />
             <Tooltip content={({ payload }) => {
               if (!payload?.length) return null;
               const d = payload[0].payload;

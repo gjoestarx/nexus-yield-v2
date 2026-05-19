@@ -7,7 +7,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 interface ComparePageProps { pools: DeFiPool[]; risks: RiskAssessment[]; }
 interface HistoryData { date: string; apy: number; tvl: number; }
-const COLORS = ['#06b6d4', '#14b8a6', '#22c55e', '#f59e0b'];
+const COLORS = ['#a78bfa', '#fb7185', '#22c55e', '#f59e0b'];
 
 export function ComparePage({ pools, risks }: ComparePageProps) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -83,7 +83,7 @@ export function ComparePage({ pools, risks }: ComparePageProps) {
           <div className="relative flex-1">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">⌕</span>
             <input type="text" placeholder="Search pools to compare..." value={search} onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] outline-none focus:border-[var(--cyan)]/50" />
+              className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] outline-none focus:border-[var(--accent)]/30" />
             {searchResults.length > 0 && (
               <div className="absolute left-0 right-0 top-full z-10 mt-1 max-h-[250px] overflow-y-auto rounded-lg border border-[var(--border)] bg-[var(--bg-card)] shadow-xl">
                 {searchResults.map((pool) => (
@@ -156,9 +156,9 @@ export function ComparePage({ pools, risks }: ComparePageProps) {
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
-                <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#4a5f82' }} axisLine={false} tickLine={false} tickFormatter={(v) => { const d = new Date(v); return `${d.getMonth() + 1}/${d.getFullYear().toString().slice(2)}`; }} interval="preserveStartEnd" />
-                <YAxis tick={{ fontSize: 10, fill: '#4a5f82' }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
-                <Tooltip contentStyle={{ background: '#0f1729', border: '1px solid rgba(56,78,112,0.35)', borderRadius: 8, fontSize: 11 }} labelFormatter={(l) => new Date(l).toLocaleDateString()} formatter={(v, name) => [`${Number(v).toFixed(2)}%`, name]} />
+                <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => { const d = new Date(v); return `${d.getMonth() + 1}/${d.getFullYear().toString().slice(2)}`; }} interval="preserveStartEnd" />
+                <YAxis tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
+                <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 }} labelFormatter={(l) => new Date(l).toLocaleDateString()} formatter={(v, name) => [`${Number(v).toFixed(2)}%`, name]} />
                 {selectedPools.map((pool, i) => (<Area key={pool.id} type="monotone" dataKey={pool.symbol} stroke={COLORS[i]} fill={COLORS[i]} fillOpacity={0.05} strokeWidth={1.5} dot={false} />))}
               </AreaChart>
             </ResponsiveContainer>

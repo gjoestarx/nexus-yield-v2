@@ -8,7 +8,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, AreaChart, Area, XAx
 
 interface Allocation { poolId: string; weight: number; }
 interface PortfolioBuilderProps { pools: DeFiPool[]; risks: RiskAssessment[]; }
-const COLORS = ['#06b6d4', '#14b8a6', '#22c55e', '#f59e0b', '#ef4444', '#a78bfa', '#ec4899', '#84cc16'];
+const COLORS = ['#a78bfa', '#fb7185', '#22c55e', '#f59e0b', '#ef4444', '#a78bfa', '#ec4899', '#84cc16'];
 
 export function PortfolioBuilder({ pools, risks }: PortfolioBuilderProps) {
   const [allocations, setAllocations] = useState<Allocation[]>([]);
@@ -58,7 +58,7 @@ export function PortfolioBuilder({ pools, risks }: PortfolioBuilderProps) {
           <div className="relative mb-3">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">⌕</span>
             <input type="text" placeholder="Search pools..." value={search} onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] text-[var(--text-primary)] outline-none focus:border-[var(--cyan)]/50" />
+              className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] py-2 pl-9 pr-3 text-[12px] text-[var(--text-primary)] outline-none focus:border-[var(--accent)]/30" />
           </div>
           {searchResults.length > 0 && (
             <div className="max-h-[300px] space-y-0.5 overflow-y-auto">
@@ -78,7 +78,7 @@ export function PortfolioBuilder({ pools, risks }: PortfolioBuilderProps) {
             </div>
             <div>
               <label className="mb-1 block text-[10px] text-[var(--text-muted)]">Days</label>
-              <input type="range" min={7} max={730} value={days} onChange={(e) => setDays(Number(e.target.value))} className="w-full accent-[var(--cyan)]" />
+              <input type="range" min={7} max={730} value={days} onChange={(e) => setDays(Number(e.target.value))} className="w-full accent-[var(--accent)]" />
               <div className="text-[10px] text-[var(--text-muted)]">{days} days</div>
             </div>
           </div>
@@ -87,7 +87,7 @@ export function PortfolioBuilder({ pools, risks }: PortfolioBuilderProps) {
         <div className="panel p-4 lg:col-span-1">
           <div className="mb-3 flex items-center justify-between">
             <div className="text-[12px] font-semibold">Allocations</div>
-            <div className={`text-[11px] font-mono ${totalWeight === 100 ? 'text-[var(--green)]' : totalWeight > 100 ? 'text-[var(--red)]' : 'text-[var(--amber)]'}`}>{totalWeight}% / 100%</div>
+            <div className={`text-[11px] font-mono ${totalWeight === 100 ? 'text-[var(--green)]' : totalWeight > 100 ? 'text-[var(--red)]' : 'text-[var(--gold)]'}`}>{totalWeight}% / 100%</div>
           </div>
           {allocations.length === 0 ? (
             <div className="flex h-[200px] items-center justify-center text-[12px] text-[var(--text-muted)]">Search and add pools above</div>
@@ -124,7 +124,7 @@ export function PortfolioBuilder({ pools, risks }: PortfolioBuilderProps) {
                     <Pie data={pieData} cx="50%" cy="50%" innerRadius={45} outerRadius={75} paddingAngle={2} dataKey="value">
                       {pieData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
                     </Pie>
-                    <Tooltip contentStyle={{ background: '#0f1729', border: '1px solid rgba(56,78,112,0.35)', borderRadius: 8, fontSize: 11 }} formatter={(v) => [`${v}%`, 'Allocation']} />
+                    <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 }} formatter={(v) => [`${v}%`, 'Allocation']} />
                   </PieChart>
                 </ResponsiveContainer>
               </div>
@@ -146,10 +146,10 @@ export function PortfolioBuilder({ pools, risks }: PortfolioBuilderProps) {
         <div className="space-y-4 animate-in">
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
             <MiniStat label="Weighted APY" value={formatPct(simulation.weightedApy)} color="var(--green)" />
-            <MiniStat label="Weighted Risk" value={simulation.weightedRisk.toFixed(1)} color="var(--amber)" />
-            <MiniStat label="Expected Return" value={formatUsd(simulation.expectedReturn)} color="var(--cyan)" />
+            <MiniStat label="Weighted Risk" value={simulation.weightedRisk.toFixed(1)} color="var(--gold)" />
+            <MiniStat label="Expected Return" value={formatUsd(simulation.expectedReturn)} color="var(--accent)" />
             <MiniStat label="Net Profit" value={formatUsd(simulation.netReturn)} color="var(--green)" />
-            <MiniStat label="Diversification" value={`${(simulation.diversification * 100).toFixed(0)}%`} color="var(--purple)" />
+            <MiniStat label="Diversification" value={`${(simulation.diversification * 100).toFixed(0)}%`} color="var(--gold)" />
           </div>
           <div className="panel p-0 overflow-hidden">
             <div className="border-b border-[var(--border)] px-5 py-3">
@@ -161,15 +161,15 @@ export function PortfolioBuilder({ pools, risks }: PortfolioBuilderProps) {
                 <AreaChart data={simulation.curve}>
                   <defs>
                     <linearGradient id="portGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.25} />
-                      <stop offset="95%" stopColor="#06b6d4" stopOpacity={0} />
+                      <stop offset="5%" stopColor="#a78bfa" stopOpacity={0.25} />
+                      <stop offset="95%" stopColor="#a78bfa" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
-                  <XAxis dataKey="day" tick={{ fontSize: 10, fill: '#4a5f82' }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fontSize: 10, fill: '#4a5f82' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v / 1000).toFixed(1)}K`} />
-                  <Tooltip contentStyle={{ background: '#0f1729', border: '1px solid rgba(56,78,112,0.35)', borderRadius: 8, fontSize: 11 }} formatter={(v) => [formatUsd(Number(v)), 'Value']} labelFormatter={(l) => `Day ${l}`} />
-                  <Area type="monotone" dataKey="value" stroke="#06b6d4" strokeWidth={2} fill="url(#portGrad)" />
+                  <XAxis dataKey="day" tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v / 1000).toFixed(1)}K`} />
+                  <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 }} formatter={(v) => [formatUsd(Number(v)), 'Value']} labelFormatter={(l) => `Day ${l}`} />
+                  <Area type="monotone" dataKey="value" stroke="#a78bfa" strokeWidth={2} fill="url(#portGrad)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>

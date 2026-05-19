@@ -52,7 +52,7 @@ export function OverviewPage({ pools, risks, rankings, stats, onSelectPool }: Ov
       .sort((a, b) => b.tvl - a.tvl);
   }, [pools]);
 
-  const tooltipStyle = { background: '#0f1729', border: '1px solid rgba(56,78,112,0.35)', borderRadius: 8, fontSize: 11 };
+  const tooltipStyle = { background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 };
 
   return (
     <div className="space-y-5 animate-in">
@@ -95,9 +95,9 @@ export function OverviewPage({ pools, risks, rankings, stats, onSelectPool }: Ov
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={riskDist} barSize={28}>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
-                <XAxis dataKey="name" tick={{ fontSize: 9, fill: '#4a5f82' }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 9, fill: '#4a5f82' }} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={tooltipStyle} labelStyle={{ color: '#8b9dc3' }} itemStyle={{ color: '#e8edf5' }} formatter={(v) => [`${v} pools`, 'Count']} />
+                <XAxis dataKey="name" tick={{ fontSize: 9, fill: '#5a5a6e' }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 9, fill: '#5a5a6e' }} axisLine={false} tickLine={false} />
+                <Tooltip contentStyle={tooltipStyle} labelStyle={{ color: '#9898a8' }} itemStyle={{ color: '#f0f0f5' }} formatter={(v) => [`${v} pools`, 'Count']} />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                   {riskDist.map((entry, i) => <Cell key={i} fill={entry.color} fillOpacity={0.75} />)}
                 </Bar>
@@ -112,8 +112,8 @@ export function OverviewPage({ pools, risks, rankings, stats, onSelectPool }: Ov
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={tvlByChain} layout="vertical" barSize={20}>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.15} horizontal={false} />
-                <XAxis type="number" tick={{ fontSize: 9, fill: '#4a5f82' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v}B`} />
-                <YAxis type="category" dataKey="chain" tick={{ fontSize: 10, fill: '#8b9dc3' }} axisLine={false} tickLine={false} width={72} />
+                <XAxis type="number" tick={{ fontSize: 9, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v}B`} />
+                <YAxis type="category" dataKey="chain" tick={{ fontSize: 10, fill: '#9898a8' }} axisLine={false} tickLine={false} width={72} />
                 <Tooltip contentStyle={tooltipStyle} formatter={(v) => [`$${v}B`, 'TVL']} />
                 <Bar dataKey="tvl" radius={[0, 4, 4, 0]}>
                   {tvlByChain.map((entry, i) => <Cell key={i} fill={entry.color} fillOpacity={0.65} />)}
@@ -203,14 +203,14 @@ export function OverviewPage({ pools, risks, rankings, stats, onSelectPool }: Ov
               return (
                 <div key={pool.id} onClick={() => onSelectPool?.(pool)} className="flex items-center justify-between px-4 py-2.5 cursor-pointer hover:bg-white/[0.02]">
                   <div className="flex items-center gap-2.5">
-                    <span className="flex h-5 w-5 items-center justify-center rounded text-[9px] font-bold bg-[var(--cyan-dim)] text-[var(--cyan)]">{i + 1}</span>
+                    <span className="flex h-5 w-5 items-center justify-center rounded text-[9px] font-bold bg-[var(--accent-dim)] text-[var(--accent)]">{i + 1}</span>
                     <div>
                       <div className="text-[12px] font-medium">{pool.symbol}</div>
                       <div className="text-[9px] text-[var(--text-muted)]">{pool.protocol} · {CHAIN_LABELS[pool.chain]}</div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[12px] font-bold text-[var(--cyan)]">Risk: {risk?.score}</div>
+                    <div className="text-[12px] font-bold text-[var(--accent)]">Risk: {risk?.score}</div>
                     <div className="text-[9px] text-[var(--text-muted)]">{formatPct(pool.apy)} APY</div>
                   </div>
                 </div>
@@ -225,11 +225,11 @@ export function OverviewPage({ pools, risks, rankings, stats, onSelectPool }: Ov
 
 function StatCard({ label, value, color }: { label: string; value: string; color: string }) {
   const colors: Record<string, { accent: string; bg: string }> = {
-    cyan: { accent: 'var(--cyan)', bg: 'var(--cyan-dim)' },
+    cyan: { accent: 'var(--accent)', bg: 'var(--accent-dim)' },
     green: { accent: 'var(--green)', bg: 'var(--green-dim)' },
-    amber: { accent: 'var(--amber)', bg: 'var(--amber-dim)' },
+    amber: { accent: 'var(--gold)', bg: 'var(--gold-dim)' },
     red: { accent: 'var(--red)', bg: 'var(--red-dim)' },
-    purple: { accent: 'var(--purple)', bg: 'var(--purple-dim)' },
+    purple: { accent: 'var(--gold)', bg: 'var(--gold-dim)' },
   };
   const c = colors[color] || colors.cyan;
   return (

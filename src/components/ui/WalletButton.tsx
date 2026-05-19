@@ -27,7 +27,7 @@ export function WalletButton() {
       <button
         onClick={connect}
         disabled={isConnecting}
-        className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[var(--cyan)] to-[var(--teal)] px-3 py-2 text-[11px] font-semibold text-white transition-all hover:opacity-90 disabled:opacity-50"
+        className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[var(--accent)] to-[var(--rose)] px-3 py-2 text-[11px] font-semibold text-white transition-all hover:opacity-90 disabled:opacity-50"
       >
         {isConnecting ? (
           <>

@@ -49,7 +49,7 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
     });
   }, [radarPools, riskMap]);
 
-  const RADAR_COLORS = ['#06b6d4', '#14b8a6', '#22c55e', '#f59e0b', '#a78bfa'];
+  const RADAR_COLORS = ['#a78bfa', '#fb7185', '#22c55e', '#f59e0b', '#a78bfa'];
 
   const histogramData = useMemo(() => {
     const buckets = [
@@ -74,11 +74,11 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
     return RISK_COLORS['Very High'];
   };
 
-  const tooltipStyle = { background: '#0f1729', border: '1px solid rgba(56,78,112,0.35)', borderRadius: 8, fontSize: 11 };
+  const tooltipStyle = { background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 };
 
   return (
     <div className="space-y-4 animate-in">
-      <Card className="panel-glass glow-cyan p-0 overflow-hidden">
+      <Card className="panel-glass glow-accent p-0 overflow-hidden">
         <div className="border-b border-[var(--border)] px-5 py-3">
           <div className="text-sm font-semibold">APY vs Risk Score</div>
           <div className="text-[10px] text-[var(--text-muted)]">Bubble size = TVL · Color = Risk category</div>
@@ -87,8 +87,8 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
           <ResponsiveContainer width="100%" height="100%">
             <ScatterChart margin={{ top: 10, right: 20, bottom: 20, left: 10 }}>
               <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-              <XAxis dataKey="risk" name="Risk" domain={[0, 100]} tick={{ fontSize: 11 }} label={{ value: 'Risk Score', position: 'insideBottom', offset: -8, style: { fontSize: 11, fill: '#4a5f82' } }} />
-              <YAxis dataKey="apy" name="APY" tick={{ fontSize: 11 }} label={{ value: 'APY %', angle: -90, position: 'insideLeft', style: { fontSize: 11, fill: '#4a5f82' } }} />
+              <XAxis dataKey="risk" name="Risk" domain={[0, 100]} tick={{ fontSize: 11 }} label={{ value: 'Risk Score', position: 'insideBottom', offset: -8, style: { fontSize: 11, fill: '#5a5a6e' } }} />
+              <YAxis dataKey="apy" name="APY" tick={{ fontSize: 11 }} label={{ value: 'APY %', angle: -90, position: 'insideLeft', style: { fontSize: 11, fill: '#5a5a6e' } }} />
               <Tooltip cursor={{ strokeDasharray: '3 3' }} content={({ payload }) => {
                 if (!payload?.length) return null;
                 const d = payload[0].payload;
@@ -164,7 +164,7 @@ export function AnalyticsPage({ pools, risks }: AnalyticsPageProps) {
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="70%">
                 <PolarGrid stroke="rgba(148,163,184,0.15)" />
-                <PolarAngleAxis dataKey="axis" tick={{ fontSize: 10, fill: '#4a5f82' }} />
+                <PolarAngleAxis dataKey="axis" tick={{ fontSize: 10, fill: '#5a5a6e' }} />
                 <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} />
                 {radarPools.map((pool, i) => (
                   <Radar key={pool.id} name={pool.symbol} dataKey={pool.symbol} stroke={RADAR_COLORS[i]} fill={RADAR_COLORS[i]} fillOpacity={0.1} strokeWidth={1.5} />

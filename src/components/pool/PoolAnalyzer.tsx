@@ -37,7 +37,7 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
     <div className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/60 p-4 pt-8 backdrop-blur-md">
       <div className="w-full max-w-3xl space-y-4 pb-8">
         <div className="panel overflow-hidden">
-          <div className="bg-gradient-to-r from-[var(--cyan)]/10 to-[var(--teal)]/5 px-6 py-5">
+          <div className="bg-gradient-to-r from-[var(--accent)]/10 to-[var(--rose)]/5 px-6 py-5">
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-xl font-bold">{pool.symbol}</h2>
@@ -48,22 +48,22 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                {pool.url && (<a href={pool.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 rounded-lg bg-[var(--cyan)] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[var(--cyan)]/80 transition-colors shadow-lg shadow-cyan-500/20">↗ Open on DefiLlama</a>)}
+                {pool.url && (<a href={pool.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 rounded-lg bg-[var(--accent)] px-4 py-2 text-[11px] font-semibold text-white hover:bg-[var(--accent)]/80 transition-colors shadow-lg shadow-accent/20">↗ Open on DefiLlama</a>)}
                 <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm transition-colors hover:bg-white/20">✕</button>
               </div>
             </div>
           </div>
           <div className="grid grid-cols-4 divide-x divide-[var(--border)]">
             <QuickStat label="APY" value={formatPct(pool.apy)} color="text-[var(--green)]" />
-            <QuickStat label="TVL" value={formatUsd(pool.tvlUsd)} color="text-[var(--cyan)]" />
+            <QuickStat label="TVL" value={formatUsd(pool.tvlUsd)} color="text-[var(--accent)]" />
             <QuickStat label="Risk" value={`${risk.score}/100`} color={riskColor} />
-            <QuickStat label="Stability" value={`${(pool.stabilityIndicator * 100).toFixed(0)}%`} color="text-[var(--purple)]" />
+            <QuickStat label="Stability" value={`${(pool.stabilityIndicator * 100).toFixed(0)}%`} color="text-[var(--gold)]" />
           </div>
         </div>
 
         <div className="flex gap-1 rounded-lg bg-[var(--bg-primary)] p-1">
           {([{ id: 'overview', label: 'Overview' }, { id: 'history', label: 'History' }, { id: 'simulate', label: 'Simulate' }] as const).map((tab) => (
-            <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 rounded-md px-3 py-2 text-[12px] font-medium transition-all ${activeTab === tab.id ? 'bg-[var(--cyan-dim)] text-[var(--cyan)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}`}>{tab.label}</button>
+            <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex-1 rounded-md px-3 py-2 text-[12px] font-medium transition-all ${activeTab === tab.id ? 'bg-[var(--accent-dim)] text-[var(--accent)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}`}>{tab.label}</button>
           ))}
         </div>
 
@@ -103,22 +103,22 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                 </div>
               </div>
             </div>
-            {pool.url && (<a href={pool.url} target="_blank" rel="noopener noreferrer" className="panel flex items-center justify-between p-4 hover:bg-white/[0.03] transition-colors cursor-pointer"><div><div className="text-[12px] font-medium">View on DefiLlama</div><div className="text-[10px] text-[var(--text-muted)]">Full pool details, historical data, and protocol info</div></div><span className="text-[var(--cyan)] text-[14px]">↗</span></a>)}
+            {pool.url && (<a href={pool.url} target="_blank" rel="noopener noreferrer" className="panel flex items-center justify-between p-4 hover:bg-white/[0.03] transition-colors cursor-pointer"><div><div className="text-[12px] font-medium">View on DefiLlama</div><div className="text-[10px] text-[var(--text-muted)]">Full pool details, historical data, and protocol info</div></div><span className="text-[var(--accent)] text-[14px]">↗</span></a>)}
           </div>
         )}
 
         {activeTab === 'history' && (
           <div className="space-y-4 animate-in">
             {historyLoading ? (
-              <div className="panel flex h-[200px] items-center justify-center"><div className="text-center"><div className="mx-auto mb-2 h-6 w-6 animate-spin rounded-full border-2 border-[var(--cyan)]/30 border-t-[var(--cyan)]" /><div className="text-[11px] text-[var(--text-muted)]">Loading historical data...</div></div></div>
+              <div className="panel flex h-[200px] items-center justify-center"><div className="text-center"><div className="mx-auto mb-2 h-6 w-6 animate-spin rounded-full border-2 border-[var(--accent)]/30 border-t-[var(--accent)]" /><div className="text-[11px] text-[var(--text-muted)]">Loading historical data...</div></div></div>
             ) : history.length > 0 ? (
               <>
                 {historyStats && (
                   <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
                     <MiniStat label="Min APY" value={formatPct(historyStats.min)} color="var(--red)" />
                     <MiniStat label="Max APY" value={formatPct(historyStats.max)} color="var(--green)" />
-                    <MiniStat label="Avg APY" value={formatPct(historyStats.avg)} color="var(--cyan)" />
-                    <MiniStat label="Data Points" value={String(historyStats.points)} color="var(--purple)" />
+                    <MiniStat label="Avg APY" value={formatPct(historyStats.avg)} color="var(--accent)" />
+                    <MiniStat label="Data Points" value={String(historyStats.points)} color="var(--gold)" />
                   </div>
                 )}
                 <div className="panel p-0 overflow-hidden">
@@ -126,12 +126,12 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                   <div className="h-[280px] px-2 py-2">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={chartHistory}>
-                        <defs><linearGradient id="histGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#06b6d4" stopOpacity={0.25} /><stop offset="95%" stopColor="#06b6d4" stopOpacity={0} /></linearGradient></defs>
+                        <defs><linearGradient id="histGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#a78bfa" stopOpacity={0.25} /><stop offset="95%" stopColor="#a78bfa" stopOpacity={0} /></linearGradient></defs>
                         <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
-                        <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#4a5f82' }} axisLine={false} tickLine={false} tickFormatter={(v) => { const d = new Date(v); return `${d.getMonth()+1}/${d.getFullYear().toString().slice(2)}`; }} interval="preserveStartEnd" />
-                        <YAxis tick={{ fontSize: 10, fill: '#4a5f82' }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
-                        <Tooltip contentStyle={{ background: '#0f1729', border: '1px solid rgba(56,78,112,0.35)', borderRadius: 8, fontSize: 11 }} labelFormatter={(l) => new Date(l).toLocaleDateString()} formatter={(v) => [`${Number(v).toFixed(2)}%`, 'APY']} />
-                        <Area type="monotone" dataKey="apy" stroke="#06b6d4" strokeWidth={2} fill="url(#histGrad)" dot={false} />
+                        <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => { const d = new Date(v); return `${d.getMonth()+1}/${d.getFullYear().toString().slice(2)}`; }} interval="preserveStartEnd" />
+                        <YAxis tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
+                        <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 }} labelFormatter={(l) => new Date(l).toLocaleDateString()} formatter={(v) => [`${Number(v).toFixed(2)}%`, 'APY']} />
+                        <Area type="monotone" dataKey="apy" stroke="#a78bfa" strokeWidth={2} fill="url(#histGrad)" dot={false} />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
@@ -141,12 +141,12 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                   <div className="h-[200px] px-2 py-2">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={chartHistory}>
-                        <defs><linearGradient id="tvlGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#14b8a6" stopOpacity={0.25} /><stop offset="95%" stopColor="#14b8a6" stopOpacity={0} /></linearGradient></defs>
+                        <defs><linearGradient id="tvlGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#fb7185" stopOpacity={0.25} /><stop offset="95%" stopColor="#fb7185" stopOpacity={0} /></linearGradient></defs>
                         <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
-                        <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#4a5f82' }} axisLine={false} tickLine={false} tickFormatter={(v) => { const d = new Date(v); return `${d.getMonth()+1}/${d.getFullYear().toString().slice(2)}`; }} interval="preserveStartEnd" />
-                        <YAxis tick={{ fontSize: 10, fill: '#4a5f82' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(Number(v)/1e9).toFixed(1)}B`} />
-                        <Tooltip contentStyle={{ background: '#0f1729', border: '1px solid rgba(56,78,112,0.35)', borderRadius: 8, fontSize: 11 }} formatter={(v) => [formatUsd(Number(v)), 'TVL']} />
-                        <Area type="monotone" dataKey="tvl" stroke="#14b8a6" strokeWidth={2} fill="url(#tvlGrad)" dot={false} />
+                        <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => { const d = new Date(v); return `${d.getMonth()+1}/${d.getFullYear().toString().slice(2)}`; }} interval="preserveStartEnd" />
+                        <YAxis tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(Number(v)/1e9).toFixed(1)}B`} />
+                        <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 }} formatter={(v) => [formatUsd(Number(v)), 'TVL']} />
+                        <Area type="monotone" dataKey="tvl" stroke="#fb7185" strokeWidth={2} fill="url(#tvlGrad)" dot={false} />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
@@ -161,22 +161,22 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
             <div className="panel p-4">
               <div className="mb-4 text-[12px] font-semibold">Simulation Parameters</div>
               <div className="flex flex-wrap items-end gap-4">
-                <div><label className="mb-1 block text-[10px] text-[var(--text-muted)]">Capital ($)</label><input type="number" value={capital} onChange={(e) => setCapital(Number(e.target.value))} className="w-28 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--cyan)]/50" /></div>
-                <div><label className="mb-1 block text-[10px] text-[var(--text-muted)]">Days</label><input type="number" value={days} onChange={(e) => setDays(Number(e.target.value))} className="w-24 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--cyan)]/50" /></div>
-                <Button onClick={() => simulate(pool, capital, days, mode)} disabled={simLoading} className="bg-gradient-to-r from-[var(--cyan)] to-[var(--teal)]">{simLoading ? 'Running...' : 'Run Monte Carlo'}</Button>
+                <div><label className="mb-1 block text-[10px] text-[var(--text-muted)]">Capital ($)</label><input type="number" value={capital} onChange={(e) => setCapital(Number(e.target.value))} className="w-28 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--accent)]/30" /></div>
+                <div><label className="mb-1 block text-[10px] text-[var(--text-muted)]">Days</label><input type="number" value={days} onChange={(e) => setDays(Number(e.target.value))} className="w-24 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-[12px] outline-none focus:border-[var(--accent)]/30" /></div>
+                <Button onClick={() => simulate(pool, capital, days, mode)} disabled={simLoading} className="bg-gradient-to-r from-[var(--accent)] to-[var(--rose)]">{simLoading ? 'Running...' : 'Run Monte Carlo'}</Button>
               </div>
             </div>
             {result && (
               <div className="space-y-4 animate-in">
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-                  <MiniStat label="Expected" value={formatUsd(result.simulation.expectedReturn)} color="var(--cyan)" />
+                  <MiniStat label="Expected" value={formatUsd(result.simulation.expectedReturn)} color="var(--accent)" />
                   <MiniStat label="Best (95th)" value={formatUsd(result.simulation.bestCase)} color="var(--green)" />
                   <MiniStat label="Worst (5th)" value={formatUsd(result.simulation.worstCase)} color="var(--red)" />
-                  <MiniStat label="Sharpe" value={result.simulation.sharpeLikeRatio.toFixed(3)} color="var(--purple)" />
+                  <MiniStat label="Sharpe" value={result.simulation.sharpeLikeRatio.toFixed(3)} color="var(--gold)" />
                 </div>
                 <div className="grid grid-cols-3 gap-3">
                   <MiniStat label="Net Return" value={formatUsd(result.simulation.netReturn)} color="var(--green)" />
-                  <MiniStat label="IL Estimate" value={`${result.simulation.impermanentLossEstimate.toFixed(2)}%`} color="var(--amber)" />
+                  <MiniStat label="IL Estimate" value={`${result.simulation.impermanentLossEstimate.toFixed(2)}%`} color="var(--gold)" />
                   <MiniStat label="Gas Impact" value={`${result.simulation.gasImpact.toFixed(2)}%`} color="var(--text-muted)" />
                 </div>
                 <div className="panel p-0 overflow-hidden">
@@ -184,21 +184,21 @@ export function PoolAnalyzer({ pool, risk, mode, onClose }: PoolAnalyzerProps) {
                   <div className="h-[250px] px-2 py-2">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={result.simulation.growthCurve}>
-                        <defs><linearGradient id="simGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#06b6d4" stopOpacity={0.25} /><stop offset="95%" stopColor="#06b6d4" stopOpacity={0} /></linearGradient></defs>
+                        <defs><linearGradient id="simGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#a78bfa" stopOpacity={0.25} /><stop offset="95%" stopColor="#a78bfa" stopOpacity={0} /></linearGradient></defs>
                         <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
-                        <XAxis dataKey="day" tick={{ fontSize: 10, fill: '#4a5f82' }} axisLine={false} tickLine={false} />
-                        <YAxis tick={{ fontSize: 10, fill: '#4a5f82' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v/1000).toFixed(1)}K`} />
-                        <Tooltip contentStyle={{ background: '#0f1729', border: '1px solid rgba(56,78,112,0.35)', borderRadius: 8, fontSize: 11 }} formatter={(v) => [formatUsd(Number(v)), 'Value']} labelFormatter={(l) => `Day ${l}`} />
+                        <XAxis dataKey="day" tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} />
+                        <YAxis tick={{ fontSize: 10, fill: '#5a5a6e' }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v/1000).toFixed(1)}K`} />
+                        <Tooltip contentStyle={{ background: '#131318', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, fontSize: 11 }} formatter={(v) => [formatUsd(Number(v)), 'Value']} labelFormatter={(l) => `Day ${l}`} />
                         <ReferenceLine y={capital} stroke="#4a5f82" strokeDasharray="5 5" />
-                        <Area type="monotone" dataKey="value" stroke="#06b6d4" strokeWidth={2} fill="url(#simGrad)" />
+                        <Area type="monotone" dataKey="value" stroke="#a78bfa" strokeWidth={2} fill="url(#simGrad)" />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
-                <div className="panel bg-[var(--cyan-dim)] p-4">
-                  <div className="mb-2 text-[12px] font-semibold text-[var(--cyan)]">{result.explanation.headline}</div>
-                  <ul className="space-y-1 text-[11px] text-[var(--text-secondary)]">{result.explanation.insights.map((insight, i) => (<li key={i} className="flex items-start gap-2"><span className="text-[var(--cyan)]">▸</span>{insight}</li>))}</ul>
-                  <div className="mt-2 text-[11px]"><strong className="text-[var(--cyan)]">Recommendation:</strong> {result.explanation.recommendation}</div>
+                <div className="panel bg-[var(--accent-dim)] p-4">
+                  <div className="mb-2 text-[12px] font-semibold text-[var(--accent)]">{result.explanation.headline}</div>
+                  <ul className="space-y-1 text-[11px] text-[var(--text-secondary)]">{result.explanation.insights.map((insight, i) => (<li key={i} className="flex items-start gap-2"><span className="text-[var(--accent)]">▸</span>{insight}</li>))}</ul>
+                  <div className="mt-2 text-[11px]"><strong className="text-[var(--accent)]">Recommendation:</strong> {result.explanation.recommendation}</div>
                   <div className="mt-1 text-[10px] text-[var(--text-muted)]">{result.explanation.riskNote}</div>
                 </div>
               </div>

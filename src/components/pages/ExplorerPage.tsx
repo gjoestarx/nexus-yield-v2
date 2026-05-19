@@ -65,7 +65,7 @@ export function ExplorerPage({ pools, risks, rankings, onSelectPool }: ExplorerP
         <div className="relative flex-1 min-w-[200px]">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">⌕</span>
           <input type="text" placeholder="Search pools, protocols, chains..." value={search} onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-lg border border-[var(--border)] bg-black/30 py-2 pl-9 pr-4 text-sm text-white placeholder-[var(--text-muted)] outline-none focus:border-[var(--cyan)]/50 focus:ring-1 focus:ring-[var(--cyan)]/30" />
+            className="w-full rounded-lg border border-[var(--border)] bg-black/30 py-2 pl-9 pr-4 text-sm text-white placeholder-[var(--text-muted)] outline-none focus:border-[var(--accent)]/30 focus:ring-1 focus:ring-[var(--accent)]/30" />
         </div>
         <select value={chainFilter} onChange={(e) => setChainFilter(e.target.value as Chain | 'all')}
           className="rounded-lg border border-[var(--border)] bg-black/30 px-3 py-2 text-sm text-white">
@@ -125,7 +125,7 @@ export function ExplorerPage({ pools, risks, rankings, onSelectPool }: ExplorerP
                     </td>
                     <td className="px-4 py-2.5">
                       <div className="mx-auto h-1.5 w-14 overflow-hidden rounded-full bg-white/10">
-                        <div className="h-full rounded-full bg-[var(--cyan)]" style={{ width: `${pool.stabilityIndicator * 100}%` }} />
+                        <div className="h-full rounded-full bg-[var(--accent)]" style={{ width: `${pool.stabilityIndicator * 100}%` }} />
                       </div>
                     </td>
                     <td className="px-4 py-2.5 text-center font-mono text-xs font-semibold">{rank?.score.toFixed(3) ?? '—'}</td>
