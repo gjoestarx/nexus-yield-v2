@@ -19,6 +19,9 @@ const ComparePage = dynamic(() => import('@/components/pages/ComparePage').then(
 const WatchlistPage = dynamic(() => import('@/components/pages/WatchlistPage').then(m => ({ default: m.WatchlistPage })), { ssr: false });
 const PoolAnalyzer = dynamic(() => import('@/components/pool/PoolAnalyzer').then(m => ({ default: m.PoolAnalyzer })), { ssr: false });
 const AlertsPage = dynamic(() => import('@/components/pages/AlertsPage').then(m => ({ default: m.AlertsPage })), { ssr: false });
+const GasTrackerPage = dynamic(() => import('@/components/pages/GasTrackerPage').then(m => ({ default: m.GasTrackerPage })), { ssr: false });
+const YieldCalculatorPage = dynamic(() => import('@/components/pages/YieldCalculatorPage').then(m => ({ default: m.YieldCalculatorPage })), { ssr: false });
+const ProtocolsPage = dynamic(() => import('@/components/pages/ProtocolsPage').then(m => ({ default: m.ProtocolsPage })), { ssr: false });
 
 export default function Dashboard() {
   const { t } = useI18n();
@@ -47,6 +50,9 @@ export default function Dashboard() {
     compare: { title: t('page.compare.title'), subtitle: t('page.compare.subtitle') },
     watchlist: { title: t('page.watchlist.title'), subtitle: t('page.watchlist.subtitle') },
     alerts: { title: t('page.alerts.title'), subtitle: t('page.alerts.subtitle') },
+    gas: { title: t('page.gas.title'), subtitle: t('page.gas.subtitle') },
+    yieldCalc: { title: t('page.yieldCalc.title'), subtitle: t('page.yieldCalc.subtitle') },
+    protocols: { title: t('page.protocols.title'), subtitle: t('page.protocols.subtitle') },
   };
 
   const pageInfo = PAGE_TITLES[activePage];
@@ -142,6 +148,9 @@ export default function Dashboard() {
           {activePage === 'compare' && <ComparePage pools={pools} risks={risks} />}
           {activePage === 'watchlist' && <WatchlistPage pools={pools} risks={risks} />}
           {activePage === 'alerts' && <AlertsPage pools={pools} risks={risks} onAlertCountChange={setAlertCount} />}
+          {activePage === 'gas' && <GasTrackerPage />}
+          {activePage === 'yieldCalc' && <YieldCalculatorPage />}
+          {activePage === 'protocols' && <ProtocolsPage pools={pools} risks={risks} />}
         </main>
       </div>
       {selectedPool && selectedRisk && (
