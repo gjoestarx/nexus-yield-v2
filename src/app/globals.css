@@ -46,6 +46,99 @@
   --radius-xl: 20px;
 }
 
+/* ============================================
+   LIGHT THEME
+   ============================================ */
+
+[data-theme="light"] {
+  --bg-0: #ffffff;
+  --bg-1: #f8f9fa;
+  --bg-2: #f1f3f5;
+  --bg-3: #e9ecef;
+  --bg-elevated: #ffffff;
+
+  --border-subtle: rgba(0,0,0,0.06);
+  --border-default: rgba(0,0,0,0.10);
+  --border-strong: rgba(0,0,0,0.16);
+
+  --text-0: #0a0a0a;
+  --text-1: #1a1a1a;
+  --text-2: #525252;
+  --text-3: #737373;
+  --text-4: #a3a3a3;
+
+  --accent: #7c3aed;
+  --accent-muted: rgba(124,58,237,0.10);
+  --accent-subtle: rgba(124,58,237,0.05);
+
+  --positive: #16a34a;
+  --positive-muted: rgba(22,163,74,0.10);
+
+  --negative: #e11d48;
+  --negative-muted: rgba(225,29,72,0.10);
+
+  --warning: #d97706;
+  --warning-muted: rgba(217,119,6,0.10);
+
+  --info: #2563eb;
+  --info-muted: rgba(37,99,235,0.10);
+}
+
+[data-theme="light"] .app-sidebar {
+  background: var(--bg-1);
+  border-right-color: var(--border-subtle);
+}
+
+[data-theme="light"] .app-header {
+  background: rgba(255,255,255,0.85);
+  border-bottom-color: var(--border-subtle);
+}
+
+[data-theme="light"] .sidebar-link.active {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+[data-theme="light"] .sidebar-link:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+[data-theme="light"] .data-table tr:hover td {
+  background: rgba(0,0,0,0.02);
+}
+
+[data-theme="light"] .metric::after {
+  opacity: 0.2;
+}
+
+[data-theme="light"] .mode-btn.active {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+[data-theme="light"] .btn-secondary {
+  background: rgba(0,0,0,0.04);
+  border-color: var(--border-default);
+}
+
+[data-theme="light"] .btn-secondary:hover {
+  background: rgba(0,0,0,0.07);
+}
+
+[data-theme="light"] .surface {
+  background: var(--bg-2);
+  border-color: var(--border-subtle);
+}
+
+[data-theme="light"] .header-search-input {
+  background: var(--bg-2);
+  border-color: var(--border-default);
+  color: var(--text-0);
+}
+
+[data-theme="light"] .recharts-cartesian-grid line { stroke: rgba(0,0,0,0.06) !important; }
+[data-theme="light"] .recharts-text { fill: #737373 !important; }
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -55,6 +148,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
+  transition: background 0.3s, color 0.3s;
 }
 
 /* ============================================
