@@ -39,7 +39,7 @@ export function usePools(initialFilters?: Partial<Filters>) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>({ ...DEFAULT_FILTERS, ...initialFilters });
-  const [lastRefreshTime, setLastRefreshTime] = useState<string>('');
+  const [lastRefreshTime, setLastRefreshTime] = useState<number>(Date.now());
   const abortRef = useRef<AbortController | null>(null);
 
   const fetchData = useCallback(async (f: Filters) => {
@@ -59,7 +59,7 @@ export function usePools(initialFilters?: Partial<Filters>) {
       const json = await res.json();
       if (json.error) throw new Error(json.error);
       setData(json);
-      setLastRefreshTime(new Date().toISOString());
+      setLastRefreshTime(Date.now());
     } catch (err: unknown) {
       if (err instanceof Error && err.name === 'AbortError') return;
       setError(err instanceof Error ? err.message : 'Unknown error');
